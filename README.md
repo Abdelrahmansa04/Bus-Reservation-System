@@ -1,5 +1,4 @@
 # My-project-
-bla bla bla bla 
-
+this project is the start of the season so see you next season
 
 ## Project notes
