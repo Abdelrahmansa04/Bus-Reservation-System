@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-
+import HomePage from './components/HomePage';
 function App() {
   return (
     <div className="App">
       {/* Navigation Bar */}
       <nav className="navbar">
-        <div className="logo">Ejust Bus Reservation</div>
+        <div className="logo">King's trip</div>
         <ul className="nav-links">
           <li><a href="#">Home</a></li>
           <li><a href="#">Bus Schedules</a></li>
@@ -28,7 +28,7 @@ function App() {
           <button className="search-btn">Search</button>
         </div>
       </header>
-
+      <HomePage /> {/* Render the HomePage component */}
       {/* Featured Services */}
       <section className="services">
         <h2>Our Services</h2>
@@ -72,5 +72,6 @@ function App() {
     </div>
   );
 }
+// src/App.js
 
 export default App;
