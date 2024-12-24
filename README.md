@@ -27,5 +27,7 @@ made the homepage,  choose trip : add from(city) to (city), date(day of the trip
 top right corner to login/signup
 top left corner name of the website, under the choose the trip our services  under it the popular trips in the website
 
+--abdelrahman saeed-- 
+added searching for busses(Bus types and avalible min seats and search buttons) and bus details(bus type, Departure Time, Available Seats and Facilities).
 
 
