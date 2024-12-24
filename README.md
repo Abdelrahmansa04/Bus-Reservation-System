@@ -15,3 +15,8 @@ Features:
 12- Black-list and white-list
 13- User profile
 14- Dashboard
+
+
+--Mohamed Tareq--
+Made the bus schema, modified the front-end form for adding a bus but still not specific to admin, allowed the user to book a bus after the admin has added one.
+Issues still exist for the APIs, indicating as they doesn't exist.
