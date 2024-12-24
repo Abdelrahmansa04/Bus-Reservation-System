@@ -20,3 +20,12 @@ Features:
 --Mohamed Tareq--
 Made the bus schema, modified the front-end form for adding a bus but still not specific to admin, allowed the user to book a bus after the admin has added one.
 Issues still exist for the APIs, indicating as they doesn't exist.
+
+
+--abdelrahman saeed--
+made the homepage,  choose trip : add from(city) to (city), date(day of the trip) and adding popular trips with their prices in EGP.
+top right corner to login/signup
+top left corner name of the website, under the choose the trip our services  under it the popular trips in the website
+
+
+
