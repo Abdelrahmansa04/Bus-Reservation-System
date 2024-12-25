@@ -1,0 +1,82 @@
+/* SeatSelection.css */
+.seat-selection-container {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #0000FF, #FFFFFF); /* Blue to White Gradient */
+    color: #333;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+  
+  h2 {
+    font-size: 28px;
+    color: #0000FF; /* Blue Text */
+    margin-bottom: 20px;
+  }
+  
+  .bus-seats {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .seat-row {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .seat {
+    padding: 20px;
+    font-size: 16px;
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #007bff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .seat.available {
+    background-color: #fff;
+  }
+  
+  .seat.selected {
+    background-color: #007bff;
+    color: white;
+    pointer-events: none; /* Disable further clicks */
+  }
+  
+  .seat:hover {
+    transform: translateY(-3px);
+  }
+  
+  .seat:disabled {
+    cursor: not-allowed;
+  }
+  
+  .actions {
+    margin-top: 30px;
+  }
+  
+  .confirm-button {
+    padding: 12px 25px;
+    background-color: #007bff; /* Blue Button */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 200px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .confirm-button:hover {
+    background-color: #0056b3; /* Darker Blue on Hover */
+    transform: translateY(-3px);
+  }
+  

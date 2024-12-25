@@ -1,12 +1,17 @@
+// src/App.js
 import React from 'react';
-import './App.css'; // Importing styles for App (if any)
-import Homepage from './Homepage'; // Importing the Homepage component
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Homepage from './Homepage';
+import SeatSelection from './SeatSelection';
 
 const App = () => {
   return (
-    <div className="App">
-      <Homepage /> {/* Rendering the Homepage component */}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/seat-selection" element={<SeatSelection />} />
+      </Routes>
+    </Router>
   );
 };
 
