@@ -33,4 +33,7 @@ added searching for busses(Bus types and avalible min seats and search buttons) 
 --Mohamed Abdalfattah--
 made the login page with out the css, and the server and the registeration page, with the back end of them
 
+--Abdelrahman Saeed-- 
+Make a New Homepage (branch) due to some error happened in the files so, make a new design and new themes
+added the bus search and filters, added the popular routes, added filter for the pickup and arrival points.
 
