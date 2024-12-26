@@ -27,8 +27,12 @@ function App() {
     // </div>
     <Router>
       <Routes>
-        <Route path='/' element={<BusList/>} />
-        <Route path='/add-bus' element={<AddBus/>} />
+        <Route path='/add-bus' element={
+            <>
+            <AddBus/>
+            <BusList/>
+            </>
+        }></Route>
       </Routes>
     </Router>
   );

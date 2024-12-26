@@ -1,74 +1,49 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from 'axios';
+import "../App.css";
 
 const AddBus = () => {
-    const [busName, setBusName] = useState('');
-    const [route, setRoute] = useState('');
-    const [availableSeats, setAvailableSeats] = useState('');
+    const [totalSeats, setAllSeats] = useState('');
     const [schedule, setSchedule] = useState('');
+    const [minNoPassengers, setMinNoPassengers] = useState('');
+    const [price, setPrice] = useState('');
+    const [pickupLocation, setPickupLocation] = useState('');
+    const [arrivalLocation, setArrivalLocation] = useState('');
+    const [departureTime, setDepartureTime] = useState('');
+    const [arrivalTime, setArrivalTime] = useState('');
+    const [cancelTimeAllowance, setCancelTimeAllowance] = useState('');
+    const [bookingTimeAllowance, setBookingTimeAllowance] = useState('');
+    const [allowedNumberOfBags, setAllowedNumberOfBags] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try{
             const res = await axios.get('http://localhost:5000/buses');
             const buses = res.data;
 
-            if (busName.trim() === ""){
-                alert('Please enter bus name');
-                return;
-            }
-
-            const busExists = buses.some((bus) => bus.busName === busName);
-            if (busExists){
-                alert('Bus already exists');
-                return;
-            }
-
-            await axios.post('http://localhost:5000/buses', {busName, route, availableSeats, schedule});
+            await axios.post('http://localhost:5000/buses', {totalSeats, schedule, minNoPassengers, price, pickupLocation, 
+                arrivalLocation, departureTime, arrivalTime, cancelTimeAllowance, 
+                bookingTimeAllowance, allowedNumberOfBags});
             alert('Bus added successfully');
         } catch (err) {
-            alert('Error adding bus');
+            alert(err.response.data.message);
             console.log(err);
         }
-        
-
-
-        // try {
-        //     const buses = await axios.get("http://localhost:5000/buses");
-        //     console.log(buses.data);
-
-        //     const busses = buses.data;
-
-        //     const checkBus = async (busses) => (
-        //         buses.forEach((bus) => {
-        //         if (bus.busName === busName) {
-        //             alert("Bus already exists");
-        //             console.log(bus.busName)
-        //         }else {
-        //             await axios.post('http://localhost:5000/buses', {busName, route, availableSeats, schedule});
-        //             alert('Bus added successfully');                
-        //         }
-        //     })
-        //     )
-        //     // if (bus) {
-        //     //     return alert('Bus already exists');
-        //     // } else {
-        //         await axios.post('http://localhost:5000/buses', {busName, route, availableSeats, schedule});
-        //         alert('Bus added successfully');                
-        //     // }
-        // } catch (err){
-        //     alert('Error adding bus');
-        //     console.log(err);
-        // }
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Bus Name" value={busName} onChange={(e) => setBusName(e.target.value)} />
-            <input type="text" placeholder="Route" value={route} onChange={(e) => setRoute(e.target.value)} />
-            <input type="number" placeholder="Available Seats" value={availableSeats} onChange={(e) => setAvailableSeats(e.target.value)} />
-            <input type="text" placeholder="Schedule" value={schedule} onChange={(e) => setSchedule(e.target.value)} />
+        <form onSubmit={handleSubmit} className="add-bus">
+            <input type="text" placeholder="Pickup location" value={pickupLocation} onChange={(e) => setPickupLocation(e.target.value)} />
+            <input type="text" placeholder="Arrival location" value={arrivalLocation} onChange={(e) => setArrivalLocation(e.target.value)} />
+            <input type="number" placeholder="Departure time" value={departureTime} onChange={(e) => setDepartureTime(e.target.value)} />
+            <input type="number" placeholder="Arrival time" value={arrivalTime} onChange={(e) => setArrivalTime(e.target.value)} />
+            <input type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
+            <input type="number" placeholder="Min No. passengers" value={minNoPassengers} onChange={(e) => setMinNoPassengers(e.target.value)} />
+            <input type="number" placeholder="Allowed Number Of Bags" value={allowedNumberOfBags} onChange={(e) => setAllowedNumberOfBags(e.target.value)} />
+            <input type="number" placeholder="Booking Time Allowance" value={bookingTimeAllowance} onChange={(e) => setBookingTimeAllowance(e.target.value)} />
+            <input type="number" placeholder="Cancel Time Allowance" value={cancelTimeAllowance} onChange={(e) => setCancelTimeAllowance(e.target.value)} />
+            <input type="number" placeholder="Available Seats" value={totalSeats} onChange={(e) => setAllSeats(e.target.value)} />
+            <input type="date" placeholder="Schedule" value={schedule} onChange={(e) => setSchedule(e.target.value)} />
             <button type="submit">Add Bus</button>            
         </form>
     );
