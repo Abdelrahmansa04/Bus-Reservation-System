@@ -21,22 +21,27 @@ Features:
 Made the bus schema, modified the front-end form for adding a bus but still not specific to admin, allowed the user to book a bus after the admin has added one.
 Issues still exist for the APIs, indicating as they doesn't exist.
 
+Added the functionalities of adding and deleting bus by providing their name, route, seats, and schedule.
+made the schema and connected it to the back-end with express.js, It was well organised and handled routing efficiently.
+conncted the front-end with the back-end using axios along with try-catch statements and logic handling for edge cases.
+completely fixed the API endpoints problem by clearly understanding the routing techniques and proper handling for each endpoint.
+next steps are modifying the UI and adding more functionalities to the back-end by extending the schema of the bus and allowing the users
+to actually book and cancel the existing buses that the admin has added recently.
 
---abdelrahman saeed--
+
+///////////////////////////////////////////////////////
+--Abdelrahman Saeed-- 
 made the homepage,  choose trip : add from(city) to (city), date(day of the trip) and adding popular trips with their prices in EGP.
 top right corner to login/signup
 top left corner name of the website, under the choose the trip our services  under it the popular trips in the website
 
---abdelrahman saeed-- 
 added searching for busses(Bus types and avalible min seats and search buttons) and bus details(bus type, Departure Time, Available Seats and Facilities).
 
---Mohamed Abdalfattah--
-made the login page with out the css, and the server and the registeration page, with the back end of them
-
---Abdelrahman Saeed-- 
 Make a New Homepage (branch) due to some error happened in the files so, make a new design and new themes
 added the bus search and filters, added the popular routes, added filter for the pickup and arrival points.
 
-
---Abdelrahman Saeed--
 Added the seat sselection and the contact us feature where to type any message u want to the admin
+
+///////////////////////////////////////////////////////
+--Mohamed Abdalfattah--
+made the login page with out the css, and the server and the registeration page, with the back end of them
