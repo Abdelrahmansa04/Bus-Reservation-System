@@ -1,190 +1,177 @@
-/* General Styling */
-.home-page {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(to right, #1e3c72, #2a5298); /* Elegant Blue Gradient */
-  color: #fff;
-  padding: 30px;
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+}
+
+/* Header Section */
+.header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  box-sizing: border-box;
+  background-color: #7c0a02; /* Dark red color */
+  padding: 10px 20px;
+  color: white;
+}
+
+.company-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
 }
 
 /* Bus Search Bar */
 .bus-search-bar {
   display: flex;
-  gap: 20px;
-  margin-bottom: 30px;
   justify-content: center;
-}
-
-.bus-search-bar select, .bus-search-bar input[type="date"] {
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #1e3c72;
-  width: 250px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.bus-search-bar select:focus, .bus-search-bar input[type="date"]:focus {
-  background-color: #c9d6e3;
-  box-shadow: 0 0 8px rgba(0, 0, 255, 0.3);
-}
-
-/* Popular Routes */
-.popular-routes {
-  background-color: #1e3c72;
-  border-radius: 15px;
+  gap: 10px;
   padding: 20px;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.bus-search-bar select,
+.bus-search-bar input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Popular Routes Section */
+.popular-routes {
+  padding: 20px;
+  background-color: #fff;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .popular-routes h3 {
-  font-size: 24px;
-  margin-bottom: 20px;
+  margin: 0 0 10px;
+  color: #7c0a02;
 }
 
 .popular-routes ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
 }
 
 .popular-routes li {
-  background-color: #3498db;
-  color: white;
-  padding: 15px 25px;
-  border-radius: 50px;
-  font-size: 18px;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #f1f1f1;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  border-radius: 4px;
+  transition: background-color 0.3s;
 }
 
 .popular-routes li:hover {
-  background-color: #2980b9;
-  transform: scale(1.05);
+  background-color: #e0e0e0;
 }
 
-/* Bus List */
+/* Bus List Section */
 .bus-list {
+  padding: 20px;
   display: flex;
   flex-wrap: wrap;
-  gap: 25px;
-  justify-content: center;
-  margin-top: 40px;
+  gap: 20px;
 }
 
 .bus-card {
-  background: linear-gradient(to bottom, #1e3c72, #2a5298);
-  padding: 20px;
-  border-radius: 10px;
-  width: 300px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: calc(33% - 20px);
   transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
 }
 
 .bus-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-/* Seat Selection */
-.seat-selection {
-  margin-top: 40px;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 700px;
-}
-
-.seat-row {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 15px;
-}
-
-.seat {
-  padding: 12px;
-  font-size: 16px;
-  width: 50px;
-  height: 50px;
-  background-color: #ffffff;
-  border: 1px solid #1e3c72;
-  cursor: pointer;
-  transition: transform 0.3s, background-color 0.3s;
-}
-
-.seat.selected {
-  background-color: #3498db;
-  color: white;
-  pointer-events: none;
-}
-
-.seat:hover {
-  transform: translateY(-3px);
-}
-
-/* Contact Us */
-.contact-us-bar {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  padding: 10px 20px;
-  background-color: #3498db;
-  border-radius: 5px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.contact-us-bar:hover {
-  background-color: #2980b9;
-}
-
-/* Contact Us Form */
-.contact-us-form {
-  position: fixed;
-  bottom: 80px;
-  left: 20px;
-  background-color: #c9d6e3;
-  padding: 20px;
-  width: 300px;
-  border-radius: 10px;
+  transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.contact-us-form input, .contact-us-form textarea {
-  width: 100%;
-  padding: 12px;
-  font-size: 14px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+.bus-card h3 {
+  margin: 0;
+  color: #7c0a02;
+}
+
+.bus-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+/* Contact Us Section */
+.contact-us-bar {
+  text-align: center;
+  background-color: #7c0a02;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-us-bar:hover {
+  background-color: #a50e0b;
+}
+
+.contact-us-form {
+  padding: 20px;
+  background-color: #fff;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-us-form h3 {
+  margin: 0 0 10px;
+  color: #7c0a02;
+}
+
+.contact-us-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-us-form input,
+.contact-us-form textarea,
+.contact-us-form button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.contact-us-form textarea {
+  resize: vertical;
 }
 
 .contact-us-form button {
-  padding: 12px;
-  background-color: #1e3c72;
+  background-color: #7c0a02;
   color: white;
   border: none;
-  width: 100%;
-  font-size: 16px;
   cursor: pointer;
-  border-radius: 5px;
   transition: background-color 0.3s;
 }
 
 .contact-us-form button:hover {
-  background-color: #3498db;
+  background-color: #a50e0b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .bus-card {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .bus-card {
+    width: 100%;
+  }
 }

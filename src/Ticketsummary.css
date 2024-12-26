@@ -1,0 +1,49 @@
+/* TicketSummary.css */
+.ticket-summary-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .ticket-details,
+  .bus-details {
+    margin-bottom: 20px;
+  }
+  
+  .ticket-details p,
+  .bus-details p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  
+  strong {
+    font-weight: bold;
+  }
+  
+  .ticket-summary-container button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .ticket-summary-container button:hover {
+    background-color: #45a049;
+  }
+  
