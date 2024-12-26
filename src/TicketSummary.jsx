@@ -1,28 +1,68 @@
-// TicketSummary.jsx
 import React from 'react';
-import { useLocation } from 'react-router-dom'; // Updated import for useLocation
-// TicketSummary.jsx
-import './TicketSummary.css'; // Correct import for renamed file
-
+import { useNavigate } from 'react-router-dom';
+import './TicketSummary.css';
 
 const TicketSummary = () => {
-  const location = useLocation();
-  const { selectedSeats, totalCost } = location.state || {}; // Access passed data
+  const navigate = useNavigate();
+
+  // Simulated data (this would be passed as props or fetched from state)
+  const passenger = {
+    name: 'Abdelrahman Saeed',
+    email: 'abdelrahmansaeed288@gmail.com',
+    phone: '+1234567890'
+  };
+
+  const booking = {
+    busName: 'Express Bus',
+    departureTime: '10:00 AM',
+    pickup: 'Borg Al-Arab',
+    arrival: 'Cairo',
+    seats: ['A1', 'A2'],
+    totalPrice: '260 EGP'
+  };
+
+  // Handle redirection to home or another page
+  const handleHomeRedirect = () => {
+    navigate('/');
+  };
 
   return (
-    <div className="ticket-summary-container">
-      <h2>Ticket Summary</h2>
-      <div className="ticket-details">
-        <p><strong>Selected Seats:</strong> {selectedSeats ? selectedSeats.join(', ') : 'No seats selected'}</p>
-        <p><strong>Total Cost:</strong> ${totalCost}</p>
-      </div>
+    <div className="ticket-summary-page">
+      <div className="summary-container">
+        <h1>Ticket Summary</h1>
 
-      <div className="bus-details">
-        <h3>Bus Details</h3>
-        <p><strong>Bus Name:</strong> XYZ Bus Co.</p>
-        <p><strong>Bus Route:</strong> City A to City B</p>
-        <p><strong>Departure Time:</strong> 10:00 AM</p>
-        <p><strong>Arrival Time:</strong> 2:00 PM</p>
+        <div className="details">
+          <div className="section-title">Passenger Information</div>
+          <p><strong>Name:</strong> {passenger.name}</p>
+          <p><strong>Email:</strong> {passenger.email}</p>
+          <p><strong>Phone:</strong> {passenger.phone}</p>
+        </div>
+
+        <div className="details">
+          <div className="section-title">Bus Details</div>
+          <p><strong>Bus:</strong> {booking.busName}</p>
+          <p><strong>Departure Time:</strong> {booking.departureTime}</p>
+          <p><strong>Pickup:</strong> {booking.pickup}</p>
+          <p><strong>Arrival:</strong> {booking.arrival}</p>
+        </div>
+
+        <div className="details">
+          <div className="section-title">Seats Selected</div>
+          <p>{booking.seats.join(', ')}</p>
+        </div>
+
+        <div className="details">
+          <div className="section-title">Total Price</div>
+          <p>{booking.totalPrice}</p>
+        </div>
+
+        <button className="cta-button" onClick={handleHomeRedirect}>
+          Return to Home
+        </button>
+
+        <div className="summary-footer">
+          <p>If you need any assistance, feel free to contact us.</p>
+        </div>
       </div>
     </div>
   );

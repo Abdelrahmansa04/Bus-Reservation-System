@@ -1,111 +1,93 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SeatSelection.css';
 
 const SeatSelection = () => {
+  const navigate = useNavigate();
+  
+  // Initial selected seats and bus details
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [confirmation, setConfirmation] = useState(false);
 
-  const handleSeatSelect = (seatId) => {
-    setSelectedSeats((prev) =>
-      prev.includes(seatId)
-        ? prev.filter((id) => id !== seatId)
-        : [...prev, seatId]
-    );
+  // Sample bus details (should come from the selected bus)
+  const busDetails = {
+    name: 'Express Bus',
+    time: '10:00 AM',
+    price: '130 EGP',
+    pickup: 'Borg Al-Arab',
+    arrival: 'Cairo',
+    date: '2024-12-27',
   };
 
-  const handleConfirmation = () => {
-    setIsConfirmed(true);
+  // Sample seat grid (Assuming bus has 10 seats per row)
+  const seats = Array(20).fill(false); // 20 seats in total (for simplicity)
+
+  const handleSeatSelect = (index) => {
+    setSelectedSeats((prev) => {
+      const newSeats = [...prev];
+      if (newSeats.includes(index)) {
+        newSeats.splice(newSeats.indexOf(index), 1); // Deselect seat if already selected
+      } else {
+        newSeats.push(index); // Select the seat
+      }
+      return newSeats;
+    });
   };
 
-  const handleResetSelection = () => {
-    setSelectedSeats([]);
-    setIsConfirmed(false);
+  const handleConfirmSeats = () => {
+    setConfirmation(true);
   };
 
-  const seatLayout = [
-    { id: 'driver', position: 'driver', isAvailable: false, number: 'Driver' },
-    { id: 'door', position: 'door', isAvailable: false, number: 'Door' },
-    { id: '1', position: 'available', isAvailable: true, number: 'Available' },
-    { id: '2', position: 'available', isAvailable: true, number: 'Available' },
-    { id: '3', position: 'available', isAvailable: true, number: 'Available' },
-    { id: '4', position: 'available', isAvailable: true, number: 'Available' },
-    { id: '5', position: 'available', isAvailable: true, number: 'Available' },
-    { id: '6', position: 'available', isAvailable: true, number: 'Available' },
-    { id: '7', position: 'available', isAvailable: true, number: 'Available' },
-    { id: '8', position: 'available', isAvailable: true, number: 'Available' },
-    { id: '9', position: 'available', isAvailable: true, number: 'Available' },
-    { id: '10', position: 'available', isAvailable: true, number: 'Available' },
-  ];
+  const handleProceedToPayment = () => {
+    // Logic to proceed to the payment page (e.g., navigate to a payment page)
+    navigate('/payment');
+  };
 
   return (
-    <div className="seat-selection-container">
-      <h2>Select Your Seats</h2>
+    <div className="seat-selection-page">
+      <header className="header">
+        <h1>Seat Selection</h1>
+      </header>
+
+      <div className="bus-details">
+        <h2>{busDetails.name}</h2>
+        <p>Time: {busDetails.time}</p>
+        <p>Price per seat: {busDetails.price}</p>
+        <p>Pickup: {busDetails.pickup}</p>
+        <p>Arrival: {busDetails.arrival}</p>
+        <p>Date: {busDetails.date}</p>
+      </div>
+
       <div className="seat-grid">
-        {/* Top Row: Driver and Door */}
-        <div className="seat-row top-row">
+        {seats.map((_, index) => (
           <div
-            className={`seat driver ${!seatLayout[0].isAvailable ? 'disabled' : ''}`}
+            key={index}
+            className={`seat ${selectedSeats.includes(index) ? 'selected' : ''}`}
+            onClick={() => handleSeatSelect(index)}
           >
-            {seatLayout[0].number}
+            {index + 1}
           </div>
-          <div
-            className={`seat door ${!seatLayout[1].isAvailable ? 'disabled' : ''}`}
-          >
-            {seatLayout[1].number}
-          </div>
-        </div>
-
-        {/* Seats Below Driver and Door */}
-        <div className="seat-columns">
-          {/* Left Column Below Driver */}
-          <div className="seat-column">
-            {seatLayout.slice(2, 6).map((seat) => (
-              <div
-                key={seat.id}
-                className={`seat ${seat.position} ${selectedSeats.includes(seat.id) ? 'selected' : ''} ${
-                  !seat.isAvailable ? 'disabled' : ''
-                }`}
-                onClick={() => seat.isAvailable && handleSeatSelect(seat.id)}
-              >
-                {seat.number}
-              </div>
-            ))}
-          </div>
-
-          {/* Right Column Below Door */}
-          <div className="seat-column">
-            {seatLayout.slice(6, 10).map((seat) => (
-              <div
-                key={seat.id}
-                className={`seat ${seat.position} ${selectedSeats.includes(seat.id) ? 'selected' : ''} ${
-                  !seat.isAvailable ? 'disabled' : ''
-                }`}
-                onClick={() => seat.isAvailable && handleSeatSelect(seat.id)}
-              >
-                {seat.number}
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
 
-      <div className="confirmation">
-        {selectedSeats.length > 0 && !isConfirmed && (
-          <button className="confirm-button" onClick={handleConfirmation}>
-            Confirm Selection
-          </button>
-        )}
-        {isConfirmed && (
-          <div className="confirmation-message">
-            <p>
-              You have selected {selectedSeats.length} seat(s): {selectedSeats.join(', ')}
-            </p>
-          </div>
-        )}
-        <button className="reset-button" onClick={handleResetSelection}>
-          Reset Selection
+      {confirmation ? (
+        <div className="seat-confirmation">
+          <h3>Seats Confirmed</h3>
+          <p>Selected Seats: {selectedSeats.map((seat) => seat + 1).join(', ')}</p>
+        </div>
+      ) : (
+        <button className="confirm-btn" onClick={handleConfirmSeats}>
+          Confirm Seats
         </button>
-      </div>
+      )}
+
+      {confirmation && (
+        <div className="payment-bar">
+          <button className="proceed-btn" onClick={handleProceedToPayment}>
+            Proceed to Payment
+          </button>
+        </div>
+      )}
     </div>
   );
 };

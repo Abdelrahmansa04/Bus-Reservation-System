@@ -1,156 +1,85 @@
-/* General Layout */
-.seat-selection-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
-  font-family: 'Arial', sans-serif;
-  padding: 30px;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+/* Seat Selection Page Styles */
+.seat-selection-page {
+  padding: 20px;
 }
 
-h2 {
-  font-size: 30px;
-  margin-bottom: 30px;
-  color: #333;
-  font-weight: bold;
+.header h1 {
+  color: #ffffff; /* Dark red color */
 }
 
-/* Seat Layout */
-.seat-grid {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 30px;
-  margin-bottom: 30px;
-}
-
-/* Top Row: Driver and Door */
-.seat-row.top-row {
-  display: flex;
-  justify-content: center;
-  gap: 280px; /* Adjusted spacing between Driver and Door */
-}
-
-.driver, .door {
-  background-color: #9E9E9E; /* Light Grey */
-  color: white;
-  font-weight: bold;
-  cursor: not-allowed;
-  width: auto; /* Adjusted size to match the text */
-  padding: 15px 30px;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Seats Layout */
-.seat-columns {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 10px !important ; /* Reduced gap between columns */
-}
-
-.seat-column {
-  display: flex;
-  flex-direction: column;
-  gap: 15px; /* Adjusted gap between the seats in each column */
-  align-items: center;
-}
-
-.seat {
-  width: 70px;
-  height: 70px;
-  padding: 10px;
-  background-color: #e0e0e0;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.seat:hover {
-  background-color: #c8c8c8;
-}
-
-.seat.selected {
-  background-color: #B33A3A; /* Dark Red */
-  color: white;
-  transform: scale(1.1);
-}
-
-.seat.disabled {
-  background-color: #bdbdbd;
-  cursor: not-allowed;
-}
-
-/* Reset Selection Button (Dark Red) */
-.reset-button {
-  background-color: #B33A3A; /* Dark Red */
-  color: white;
-  padding: 15px 30px;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-  margin-top: 20px;
-}
-
-.reset-button:hover {
-  background-color: #9B2A2A; /* Slightly darker red on hover */
-}
-
-/* Confirmation and Buttons */
-.confirmation {
-  margin-top: 40px;
-  text-align: center;
-}
-
-.selection-info {
+.bus-details {
   margin-bottom: 20px;
 }
 
-.confirm-button {
-  background-color: #4caf50; /* Green for confirmation */
-  color: white;
-  padding: 15px 30px;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-  margin-top: 20px;
+.bus-details h2 {
+  font-size: 1.5em;
+  color: #800000; /* Dark red color */
 }
 
-.confirm-button:hover {
-  background-color: #45a049; /* Slightly darker green on hover */
+.bus-details p {
+  font-size: 1em;
 }
 
-.confirmation-message {
-  background-color: #f9f9f9;
-  padding: 20px;
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.seat {
+  width: 40px;
+  height: 40px;
+  background-color: #f0f0f0;
+  text-align: center;
+  line-height: 40px;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 18px;
-  color: #333;
-  margin-top: 20px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .seat-columns {
-    flex-direction: column;
-    align-items: center;
-  }
+.seat.selected {
+  background-color: #800000; /* Dark red color */
+  color: white;
+}
+
+.confirm-btn {
+  background-color: #800000; /* Dark red color */
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1.1em;
+  cursor: pointer;
+  width: 100%;
+}
+
+.confirm-btn:hover {
+  background-color: #b30000; /* Lighter dark red */
+}
+
+.seat-confirmation {
+  margin-top: 20px;
+  font-size: 1.2em;
+  color: #800000; /* Dark red color */
+}
+
+.payment-bar {
+  margin-top: 20px;
+  background-color: #800000; /* Dark red color */
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+.proceed-btn {
+  background-color: #fff;
+  color: #800000; /* Dark red color */
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.proceed-btn:hover {
+  background-color: #e6e6e6;
 }
