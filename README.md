@@ -17,6 +17,8 @@ Features:
 14- Dashboard
 
 
+///////////////////////////////////////////////////////
+
 --Mohamed Tareq--
 Made the bus schema, modified the front-end form for adding a bus but still not specific to admin, allowed the user to book a bus after the admin has added one.
 Issues still exist for the APIs, indicating as they doesn't exist.
@@ -44,5 +46,6 @@ added the bus search and filters, added the popular routes, added filter for the
 Added the seat sselection and the contact us feature where to type any message u want to the admin
 
 ///////////////////////////////////////////////////////
+
 --Mohamed Abdalfattah--
 made the login page with out the css, and the server and the registeration page, with the back end of them
