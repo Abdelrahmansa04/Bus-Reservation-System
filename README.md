@@ -59,6 +59,8 @@ added the bus search and filters, added the popular routes, added filter for the
 
 Added the seat sselection and the contact us feature where to type any message u want to the admin
 
+adjusting the UI of the seat selection and adjust the homepage where after selecting the trip go to the seat selection 
+
 ///////////////////////////////////////////////////////
 
 --Mohamed Abdalfattah--
