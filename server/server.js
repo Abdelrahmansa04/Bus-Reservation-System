@@ -10,8 +10,8 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use('/api', busRoutes);
-app.use('/api', bookingRoutes);
+app.use('/buses', busRoutes);
+// app.use('/api', bookingRoutes);
 
 //MongoDB connection 
 mongoose
@@ -20,8 +20,9 @@ mongoose
 .catch((err)=> console.error(err));
 
 //Routes
-app.use("/api/buses", require('./routes/busRoutes'))
+// app.get("/api/buses", require('./routes/busRoutes'))
+
 
 //Server start
-const PORT = process.env.PORT || 3000; 
+const PORT = process.env.PORT || 5000; 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
