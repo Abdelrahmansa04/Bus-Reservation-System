@@ -12,6 +12,7 @@ Features:
 
   - Seat selection
   - select date
+
 6- Ticket summary
 
 7- Payment
