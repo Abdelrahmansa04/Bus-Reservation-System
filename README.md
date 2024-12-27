@@ -63,6 +63,7 @@ adjusting the UI of the seat selection and adjust the homepage where after selec
 
 Added the payment method (cardholdername, expire date, cvv) added the ticket summary and succesful message that appear all the details for client registration
 modified all the pages UI that appear the same design 
+Adjusted the Logic of the homepage (search bar and the hover of the buses avalibale), seatselection (confirmation disable until i choose the seat), payment( card number make space every 4 numbers and maximu is 16 number, espiry date every two numbers make automatic slash, cvv max 3 number)
 
 ///////////////////////////////////////////////////////
 
