@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './TicketSummary.css';
+import './Ticketsummary.css';
 
 const TicketSummary = () => {
   const navigate = useNavigate();
