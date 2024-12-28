@@ -32,16 +32,17 @@ const Homepage = () => {
     const checkAuth = async () => {
       try {
         const response = await axios.get("http://localhost:3001/auth", { withCredentials: true });
-        if (response.data.authenticated) {
-          setIsAuthenticated(true);
-        } else {
-          setIsAuthenticated(false);
-          navigate("/login");
-        }
+        console.log("Authentication check response:", response.data);
+        // if (response.data.authenticated) {
+        //   setIsAuthenticated(true);
+        // } else {
+        //   setIsAuthenticated(false);
+        //   navigate("/login");
+        // }
       } catch (error) {
         console.error("Authentication check failed:", error);
         setIsAuthenticated(false);
-        navigate("/login");
+        // navigate("/login");
       } finally {
         setIsLoading(false);
       }
@@ -52,7 +53,8 @@ const Homepage = () => {
   // Logout handler
   const handleLogout = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/logout", {}, { withCredentials: true });
+      const response = await axios.post("http://localhost:3001/logout");
+      console.log("Logout response:", response);
       if (response.status === 200) {
         alert("Logged out successfully");
         navigate("/login");

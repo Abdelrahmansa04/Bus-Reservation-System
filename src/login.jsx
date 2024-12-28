@@ -11,25 +11,28 @@ function Login() {
         e.preventDefault(); // Prevent the default form submission
 
         try {
+            console.log("Email", email);
+            console.log("Password", password);
             // Make the POST request for login
             const response = await axios.post(
                 "http://localhost:3001/login",
                 { email, password },
-                { withCredentials: true } // Ensure cookies are sent if needed
             );
 
-            console.log(response);
+            console.log("Response", response);
 
             if (response.status === 200) {
                 // Store the token in sessionStorage upon successful login
-                sessionStorage.setItem('authToken', response.data.token);
-
+                // sessionStorage.setItem('authToken', response.data.token);
+                const userId = response.data.userId;
+                const sessionID = response.data.sessionID;
                 // Alert the user that the login was successful
                 alert("Login successful");
+                console.log("user ID", userId);
 
                 // Navigate to the home or seat selection page
                 navigate("/home");  // or "/seatselection" based on your use case
-                sessionStorage.setItem('authToken', response.data.token);
+                sessionStorage.setItem('authToken', userId);
             }
             
         } catch (error) {

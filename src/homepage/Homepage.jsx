@@ -66,7 +66,8 @@ const Homepage = () => {
   // Logout handler
   const handleLogout = async () => {
     try {
-      const response = await axios.post(`http://localhost:${port}/logout`, {}, { withCredentials: true });
+      const response = await axios.post(`http://localhost:${port}/logout`, null, { withCredentials: true });
+      console.log("Logout response:", response);
       if (response.status === 200) {
         alert("Logged out successfully");
         navigate("/login");
@@ -79,8 +80,8 @@ const Homepage = () => {
   // if (isLoading) {
   //   return <p>Loading buses...</p>;
   // }
-  authent()
 
+  // authent()
 
   return (
     <div className="home-page">

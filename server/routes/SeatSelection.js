@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Bus = require('./models/busModel');
+const Bus = require('../models/busModel');
 
 
 

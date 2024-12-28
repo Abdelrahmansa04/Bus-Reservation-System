@@ -11,7 +11,8 @@ const navigate = useNavigate();
 useEffect(() => {
     const checkAuth = async () => {
     try {
-        const response = await axios.get("http://localhost:3001/auth", { withCredentials: true });
+        const response = await axios.get("http://localhost:3001/auth");
+        console.log("Authentication check response:", response.data);
         if (response.data.authenticated) {
         setIsAuthenticated(true);
         } else {
@@ -21,7 +22,7 @@ useEffect(() => {
     } catch (error) {
         console.error("Authentication check failed:", error);
         setIsAuthenticated(false);
-        navigate("/login");
+        // navigate("/login");
     } finally {
         setIsLoading(false);
     }
