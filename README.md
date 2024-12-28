@@ -66,6 +66,8 @@ Added the payment method (cardholdername, expire date, cvv) added the ticket sum
 modified all the pages UI that appear the same design 
 Adjusted the Logic of the homepage (search bar and the hover of the buses avalibale), seatselection (confirmation disable until i choose the seat), payment( card number make space every 4 numbers and maximu is 16 number, espiry date every two numbers make automatic slash, cvv max 3 number)
 
+manage the backend of the contact us using express and mongodb for database (use postman & mongodb compass for testing the database)
+
 ///////////////////////////////////////////////////////
 
 --Mohamed Abdalfattah--
