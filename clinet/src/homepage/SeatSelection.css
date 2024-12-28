@@ -1,0 +1,85 @@
+/* Seat Selection Page Styles */
+.seat-selection-page {
+  padding: 20px;
+}
+
+.header h1 {
+  color: #ffffff; /* Dark red color */
+}
+
+.bus-details {
+  margin-bottom: 20px;
+}
+
+.bus-details h2 {
+  font-size: 1.5em;
+  color: #800000; /* Dark red color */
+}
+
+.bus-details p {
+  font-size: 1em;
+}
+
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.seat {
+  width: 40px;
+  height: 40px;
+  background-color: #f0f0f0;
+  text-align: center;
+  line-height: 40px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.seat.selected {
+  background-color: #800000; /* Dark red color */
+  color: white;
+}
+
+.confirm-btn {
+  background-color: #800000; /* Dark red color */
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1.1em;
+  cursor: pointer;
+  width: 100%;
+}
+
+.confirm-btn:hover {
+  background-color: #b30000; /* Lighter dark red */
+}
+
+.seat-confirmation {
+  margin-top: 20px;
+  font-size: 1.2em;
+  color: #800000; /* Dark red color */
+}
+
+.payment-bar {
+  margin-top: 20px;
+  background-color: #800000; /* Dark red color */
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+.proceed-btn {
+  background-color: #fff;
+  color: #800000; /* Dark red color */
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.proceed-btn:hover {
+  background-color: #e6e6e6;
+}

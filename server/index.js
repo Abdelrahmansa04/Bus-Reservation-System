@@ -8,8 +8,10 @@ const userModel = require('./models/users')
 require('dotenv').config();
 const busRoutes = require('./routes/busRoutes');
 const bookingRoutes = require('./routes/bookingRouter')
+const SeaSelection = require('./SeatSelection')
 
 
+port = 3001
 const app = express()
 app.use(express.json())
 app.use(cors({
@@ -19,7 +21,7 @@ app.use(cors({
 
 app.use('/buses', busRoutes);
 // app.use('/api', bookingRoutes);
-
+// app.use('/seatselection',SeaSelection)
 //MongoDB connection 
 mongoose
 .connect("mongodb://127.0.0.1:27017/bus-system", {useNewUrlParser: true, useUnifiedTopology: true})
@@ -30,19 +32,15 @@ mongoose
 // app.get("/api/buses", require('./routes/busRoutes'))
 
 
-//Server start
-const PORT = process.env.PORT || 3001; 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
 //backend of the login and signup and session
 app.use(session({
     secret: "ARandomStringThatIsHardToGuess12345",
     resave: false,
     saveUninitialized: false,
-    store: MonogoStore.create({mongoUrl: "mongodb://127.0.0.1:27017/users"}),
+    store: MonogoStore.create({mongoUrl: "mongodb://127.0.0.1:27017/bus-system"}),
     cookie: {
         httpOnly: true,
-        maxAge: 3600000,
+        maxAge: 36000000,
     }
 }))
 
