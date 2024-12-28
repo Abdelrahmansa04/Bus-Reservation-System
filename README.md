@@ -48,7 +48,11 @@ to actually book and cancel the existing buses that the admin has added recently
 Made the User profile with details like name and email, and added the dashboard which shows the booked 
 buses depending on the user's ID.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> 5d4f5b348caaf5b35ae784eb5f499a57187927ba
 
 
 >>>>>>> 5d4f5b348caaf5b35ae784eb5f499a57187927ba
