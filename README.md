@@ -28,7 +28,8 @@ completely fixed the API endpoints problem by clearly understanding the routing 
 next steps are modifying the UI and adding more functionalities to the back-end by extending the schema of the bus and allowing the users
 to actually book and cancel the existing buses that the admin has added recently.
 
-
+Made the User profile with details like name and email, and added the dashboard which shows the booked 
+buses depending on the user's ID.
 ///////////////////////////////////////////////////////
 --Abdelrahman Saeed-- 
 made the homepage,  choose trip : add from(city) to (city), date(day of the trip) and adding popular trips with their prices in EGP.
