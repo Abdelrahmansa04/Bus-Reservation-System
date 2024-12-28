@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Homepage.css';
+import axios from 'axios';
+import './Homepage.css';  // Assuming you have the corresponding CSS file
 
 const Homepage = () => {
-  const navigate = useNavigate();
   const [pickupPoint, setPickupPoint] = useState('');
   const [arrivalPoint, setArrivalPoint] = useState('');
   const [date, setDate] = useState('');
@@ -11,27 +10,23 @@ const Homepage = () => {
   const [selectedBus, setSelectedBus] = useState(null);
   const [showContactForm, setShowContactForm] = useState(false);
 
+  // Contact form states
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [responseMessage, setResponseMessage] = useState('');
+
   const buses = [
     { id: 1, name: 'Express Bus', time: '10:00 AM', price: '130 EGP', pickup: 'Borg Al-Arab', arrival: 'Cairo', date: '2024-12-27' },
     { id: 2, name: 'City Bus', time: '12:00 PM', price: '50 EGP', pickup: 'Alexandria', arrival: 'Borg Al-Arab', date: '2024-12-26' },
-    { id: 3, name: 'Night Bus', time: '9:00 PM', price: '130 EGP', pickup: 'Borg Al-Arab', arrival: 'Alexandria', date: '2024-12-28' },
-    { id: 4, name: 'Express Bus', time: '8:00 AM', price: '350 EGP', pickup: 'Borg Al-Arab', arrival: 'Aswan', date: '2024-12-28' },
-    { id: 5, name: 'City Bus', time: '6:00 PM', price: '130 EGP', pickup: 'Alexandria', arrival: 'Sharm El-Sheikh', date: '2024-12-28' },
-    { id: 6, name: 'Night Bus', time: '1:00 PM', price: '130 EGP', pickup: 'Sharm El-Sheikh', arrival: 'Alexandria', date: '2024-12-28' },
-    { id: 7, name: 'Express Bus', time: '7:00 AM', price: '200 EGP', pickup: 'Cairo', arrival: 'Luxor', date: '2024-12-29' },
-    { id: 8, name: 'City Bus', time: '3:00 PM', price: '180 EGP', pickup: 'Alexandria', arrival: 'Tanta', date: '2024-12-29' },
-    { id: 9, name: 'Night Bus', time: '10:00 PM', price: '150 EGP', pickup: 'Cairo', arrival: 'Hurghada', date: '2024-12-30' },
-    { id: 10, name: 'City Bus', time: '11:00 AM', price: '120 EGP', pickup: 'Aswan', arrival: 'Cairo', date: '2024-12-30' },
-    { id: 11, name: 'Express Bus', time: '5:00 AM', price: '100 EGP', pickup: 'Sharm El-Sheikh', arrival: 'Dahab', date: '2024-12-31' },
-    { id: 12, name: 'Night Bus', time: '8:00 PM', price: '160 EGP', pickup: 'Luxor', arrival: 'Cairo', date: '2024-12-31' },
-    { id: 13, name: 'City Bus', time: '2:00 PM', price: '130 EGP', pickup: 'Hurghada', arrival: 'Cairo', date: '2025-01-01' },
+    { id: 3, name: 'Tour Bus', time: '08:00 AM', price: '200 EGP', pickup: 'Cairo', arrival: 'Sharm El-Sheikh', date: '2024-12-25' },
+
   ];
 
   const popularRoutes = [
     { id: 1, route: 'Borg Al-Arab to Cairo' },
     { id: 2, route: 'Alexandria to Borg Al-Arab' },
-    { id: 3, route: 'Borg Al-Arab to Alexandria' },
-    { id: 5, route: 'Sharm El-Sheikh to Alexandria' },
+    // Add more popular routes...
   ];
 
   const [filteredBuses, setFilteredBuses] = useState(buses);
@@ -39,7 +34,7 @@ const Homepage = () => {
   const handleRouteSelect = route => setSelectedRoute(route);
   const handleBusSelect = bus => {
     setSelectedBus(bus);
-    navigate('/seat-selection');
+    // Navigate to seat selection page (update as per your routing setup)
   };
 
   const toggleContactForm = () => setShowContactForm(!showContactForm);
@@ -51,6 +46,26 @@ const Homepage = () => {
       (date ? bus.date === date : true)
     );
     setFilteredBuses(filtered);
+  };
+
+  // Handle the contact form submission
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+
+    const contactData = {
+      name,
+      email,
+      message,
+    };
+
+    try {
+      const response = await axios.post('http://localhost:5000/contact', contactData);
+      setResponseMessage('Message sent successfully');
+      console.log('Contact message saved:', response.data);
+    } catch (error) {
+      setResponseMessage('Failed to send message');
+      console.error('Error sending contact message:', error);
+    }
   };
 
   return (
@@ -126,13 +141,30 @@ const Homepage = () => {
       {showContactForm && (
         <div className={`contact-us-form ${showContactForm ? 'active' : ''}`}>
           <h3>Write Us a Message</h3>
-          <form onSubmit={e => e.preventDefault()}>
-            <input type="text" placeholder="Your Name" required />
-            <input type="email" placeholder="Your Email" required />
-            <textarea placeholder="Your Message" required></textarea>
-            <input type="tel" placeholder="Your Phone Number" required />
+          <form onSubmit={handleContactSubmit}>
+            <input
+              type="text"
+              placeholder="Your Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <input
+              type="email"
+              placeholder="Your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <textarea
+              placeholder="Your Message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+            ></textarea>
             <button type="submit">Send Message</button>
           </form>
+          {responseMessage && <p>{responseMessage}</p>}
         </div>
       )}
     </div>

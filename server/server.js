@@ -1,33 +1,33 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+const contactRoutes = require('./routes/contactRoutes'); // Assuming the contact routes are in the routes folder
 
-// Contact model
-
-// Initialize Express app
+// Initialize the app
 const app = express();
 
-// Middleware
-app.use(cors());  // Enable cross-origin requests
-app.use(bodyParser.json());  // Parse JSON request bodies
-app.use(bodyParser.urlencoded({ extended: true }));  // Parse URL-encoded bodies
+// Middleware to parse JSON bodies
+app.use(express.json());
 
-// MongoDB connection
-mongoose.connect('mongodb://127.0.0.1:27017/bus-system')
+// Allow Cross-Origin Requests (CORS)
+app.use(cors());
+
+// Contact routes
+app.use('/contact', contactRoutes);
+
+// MongoDB connection setup
+const dbURI = "mongodb://127.0.0.1:27017/bus-system";  // Update this with your actual MongoDB URI
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log('MongoDB connected');
+    console.log('Connected to MongoDB');
+
   })
-  .catch((err) => {
-    console.log('Error connecting to MongoDB:', err);
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+    process.exit(1);  // Exit the process if DB connection fails
   });
 
-// Routes
-app.use('/contacts', require('./routes/contactRoutes'));  // Use the contact routes
-
-
-// Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+  // Start the server after successful DB connection
+  app.listen(5000, () => {
+    console.log('Server is running on port 5000');
+  });
