@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './Homepage.css';  // Assuming you have the corresponding CSS file
 
 const Homepage = () => {
@@ -20,7 +21,6 @@ const Homepage = () => {
     { id: 1, name: 'Express Bus', time: '10:00 AM', price: '130 EGP', pickup: 'Borg Al-Arab', arrival: 'Cairo', date: '2024-12-27' },
     { id: 2, name: 'City Bus', time: '12:00 PM', price: '50 EGP', pickup: 'Alexandria', arrival: 'Borg Al-Arab', date: '2024-12-26' },
     { id: 3, name: 'Tour Bus', time: '08:00 AM', price: '200 EGP', pickup: 'Cairo', arrival: 'Sharm El-Sheikh', date: '2024-12-25' },
-
   ];
 
   const popularRoutes = [
@@ -30,11 +30,13 @@ const Homepage = () => {
   ];
 
   const [filteredBuses, setFilteredBuses] = useState(buses);
+  const navigate = useNavigate();  // To navigate to the SeatSelection page
 
   const handleRouteSelect = route => setSelectedRoute(route);
   const handleBusSelect = bus => {
     setSelectedBus(bus);
-    // Navigate to seat selection page (update as per your routing setup)
+    // Navigate to the seat selection page, passing the selected bus data
+    navigate('/seat-selection', { state: { selectedBus: bus } });
   };
 
   const toggleContactForm = () => setShowContactForm(!showContactForm);
