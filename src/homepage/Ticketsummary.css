@@ -1,0 +1,71 @@
+/* TicketSummary.css */
+.ticket-summary-page {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .summary-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 40px;
+    width: 100%;
+    max-width: 750px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .summary-container h1 {
+    color: #8e3838;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .summary-container .section-title {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .summary-container p {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  
+  .summary-container .details {
+    margin-top: 30px;
+  }
+  
+  .summary-container .cta-button {
+    background-color: #8e3838;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 30px;
+    width: 100%;
+  }
+  
+  .summary-container .cta-button:hover {
+    background-color: #6c2c2c;
+  }
+  
+  .summary-footer {
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  .summary-footer p {
+    font-size: 0.9rem;
+    color: #888;
+  }
+  

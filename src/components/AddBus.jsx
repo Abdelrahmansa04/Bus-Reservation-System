@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import axios from 'axios';
 import "../App.css";
 
+const port = 3001
 const AddBus = () => {
     const [totalSeats, setAllSeats] = useState('');
     const [schedule, setSchedule] = useState('');
@@ -18,10 +19,10 @@ const AddBus = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            const res = await axios.get('http://localhost:5000/buses');
+            const res = await axios.get(`http://localhost:${port}/buses`);
             const buses = res.data;
 
-            await axios.post('http://localhost:5000/buses', {totalSeats, schedule, minNoPassengers, price, pickupLocation, 
+            await axios.post(`http://localhost:${port}/buses`, {totalSeats, schedule, minNoPassengers, price, pickupLocation, 
                 arrivalLocation, departureTime, arrivalTime, cancelTimeAllowance, 
                 bookingTimeAllowance, allowedNumberOfBags});
             alert('Bus added successfully');

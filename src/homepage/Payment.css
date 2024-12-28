@@ -1,0 +1,48 @@
+/* Payment.css */
+.payment-container {
+    padding: 50px;
+    background-color: #f4f4f9;
+    text-align: center;
+  }
+  
+  .payment-container h1 {
+    font-size: 2.5rem;
+    color: #8e3838;
+  }
+  
+  .payment-container .payment-form {
+    max-width: 500px;
+    margin: 30px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .payment-container input[type="text"],
+  .payment-container input[type="number"],
+  .payment-container input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .payment-container .cta-button {
+    background-color: #8e3838;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .payment-container .cta-button:hover {
+    background-color: #6c2c2c;
+  }
+  

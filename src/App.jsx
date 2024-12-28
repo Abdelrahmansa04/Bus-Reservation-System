@@ -1,44 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
-import React from 'react';
-import {BrowserRouter  as Router, Route, Routes} from 'react-router-dom';
-import AddBus from './components/AddBus';
-import BusList from './components/Buslist';
-import Profile from './components/profile';
-// import HomePage from './components/Homepage';
+import './App.css'
+import React from 'react'
+import Signup from './Signup'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Login from './login'
+//from components
+import AddBus from './components/AddBus.jsx';
+import BusList from './components/Buslist.jsx';
+//form homepage
+import Homepage from './homepage/Homepage'
+import SeatSelection from './homepage/SeatSelection'
+import Payment from './homepage/Payment';
+import PaymentSuccess from './homepage/PaymentSuccess';
+import TicketSummary from './homepage/TicketSummary';  // Import TicketSummary component
+
+
 
 
 function App() {
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
-    <Router>
-      <Routes>
-        <Route path='/add-bus' element={
+   <BrowserRouter>
+    <Routes>
+
+      <Route path= '/register' element = {<Signup />}></Route>
+      <Route path= '/login' element = {<Login />}></Route>
+      
+      <Route path='/home' element={<Homepage />}></Route>
+      <Route path='/seat-selection/:busId' element={<SeatSelection />}></Route>
+      <Route path="/payment" element={<Payment />} />
+      <Route path="/payment-success" element={<PaymentSuccess />} />
+      <Route path="/ticket-summary" element={<TicketSummary />} /> {/* Add route for Ticket Summary */}
+    
+
+      <Route path='/add-bus' element={
             <>
-            <AddBus/>
-            <BusList/>
+            <AddBus />
+            <BusList />
             </>
         }></Route>
-        {/* <Route path='/home' element={<HomePage/>}></Route> */}
-        <Route path='/profile' element={<Profile/>}></Route>
-      </Routes>
-    </Router>
-  );
-};
+    </Routes>
+   </BrowserRouter>
+  )
+}
 
-export default App;
+export default App

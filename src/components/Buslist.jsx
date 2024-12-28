@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-
+// import { set } from "mongoose";
+const port = 3001
 
 const BusList = () => {
     const [buses, setBuses] = useState([]);
@@ -11,7 +12,7 @@ const BusList = () => {
     // const [seatsBooked, setSeatsBooked] = useState('');
 
 const fetchBuses = async () => {
-    const res = await axios.get('http://localhost:5000/buses');
+    const res = await axios.get(`http://localhost:${port}/buses`);
     setBuses(res.data);
     setIsLoading(false);
     console.log(res.data);
@@ -24,7 +25,7 @@ useEffect(() => {
 
 const handleDel = async (id) =>{
     try {
-        await axios.delete(`http://localhost:5000/buses/${id}`);
+        await axios.delete(`http://localhost:${port}/buses/${id}`);
         setBuses(buses.filter((bus) => bus._id !== id));
         alert("Bus deleted successfully!");
     } catch (err) {

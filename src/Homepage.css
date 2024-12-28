@@ -1,0 +1,177 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  align-items: center;
+  background-color: #7c0a02; /* Dark red color */
+  padding: 10px 20px;
+  color: white;
+}
+
+.company-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Bus Search Bar */
+.bus-search-bar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.bus-search-bar select,
+.bus-search-bar input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Popular Routes Section */
+.popular-routes {
+  padding: 20px;
+  background-color: #fff;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.popular-routes h3 {
+  margin: 0 0 10px;
+  color: #7c0a02;
+}
+
+.popular-routes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popular-routes li {
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.popular-routes li:hover {
+  background-color: #e0e0e0;
+}
+
+/* Bus List Section */
+.bus-list {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.bus-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: calc(33% - 20px);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.bus-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.bus-card h3 {
+  margin: 0;
+  color: #7c0a02;
+}
+
+.bus-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+/* Contact Us Section */
+.contact-us-bar {
+  text-align: center;
+  background-color: #7c0a02;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-us-bar:hover {
+  background-color: #a50e0b;
+}
+
+.contact-us-form {
+  padding: 20px;
+  background-color: #fff;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-us-form h3 {
+  margin: 0 0 10px;
+  color: #7c0a02;
+}
+
+.contact-us-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-us-form input,
+.contact-us-form textarea,
+.contact-us-form button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.contact-us-form textarea {
+  resize: vertical;
+}
+
+.contact-us-form button {
+  background-color: #7c0a02;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-us-form button:hover {
+  background-color: #a50e0b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .bus-card {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .bus-card {
+    width: 100%;
+  }
+}
