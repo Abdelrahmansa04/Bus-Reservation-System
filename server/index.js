@@ -28,7 +28,7 @@ app.use(session({
     store: MonogoStore.create({mongoUrl: "mongodb://127.0.0.1:27017/bus-system"}),
     cookie: {
         httpOnly: true,
-        maxAge:36000000,
+        maxAge:500000,
     }
 }))
 
@@ -74,26 +74,19 @@ app.post('/login', async  (req,res)=> {
     
     try {
         const user = await userModel.findOne({ email });
-        console.log(user)
         if (!user) {
             return res.status(404).json("This email does not exist");
         }
 
         // Check password validity
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        console.log(isPasswordValid)
         if (!isPasswordValid) {
             return res.status(401).json("The password is incorrect");
         }
 
         // Set session ID
-        const sessionID = req.sessionID;
-        // req.session.authenticated = true;   
         req.session.userId = user._id;
-        // res.send(req.session)
-        // res.send(sessionID)
-
-        res.status(200).json({"message":"Login successful", "userId":req.session.userId, "sessionID": sessionID});
+        res.status(200).json("Login successful");
     } catch (err) {
         res.status(500).json("Internal server error");
     }
@@ -115,7 +108,7 @@ app.post('/register', async (req , res) => {
     // })
     // .catch(err => res.json(err))
 
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
     try {
         const userExist = await userModel.findOne({ email });
@@ -127,7 +120,7 @@ app.post('/register', async (req , res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create new user
-        const newUser = await userModel.create({name, email, password: hashedPassword});
+        const newUser = await userModel.create({email,password: hashedPassword});
 
         res.status(201).json(newUser);
     } catch (err) {
@@ -136,24 +129,20 @@ app.post('/register', async (req , res) => {
 })
 
 app.post("/logout",(req, res) => {
-    console.log("before: ", req.session)
     req.session.destroy(err => {
         if(err){
             return res.status(500).json("failed to logout");
         }
         res.clearCookie("connect.sid");
-        res.status(200).json({"message":"logout successfuly", "session": req.session});
-        console.log("after: ", req.session)
-
+        res.status(200).json("logout successfuly");
     })
 })
 
 app.get("/auth" , (req,res)=>{
-    console.log(req.session.userId)
     if(req.session.userId){
-        res.status(200).json({authenticated: true, "session": req.session.userId});
+        res.status(200).json({authenticated: true,"userId": req.session.userId});
     }else{
-        res.status(401).json({authenticated: false});
+        res.status(401).json({authenticated: false})
     }
 })
 

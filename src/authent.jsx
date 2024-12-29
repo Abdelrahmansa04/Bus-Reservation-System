@@ -15,6 +15,7 @@ useEffect(() => {
         console.log("Authentication check response:", response.data);
         if (response.data.authenticated) {
         setIsAuthenticated(true);
+        return response.data.userId
         } else {
         setIsAuthenticated(false);
         navigate("/login");
@@ -22,7 +23,7 @@ useEffect(() => {
     } catch (error) {
         console.error("Authentication check failed:", error);
         setIsAuthenticated(false);
-        // navigate("/login");
+        navigate("/login");
     } finally {
         setIsLoading(false);
     }

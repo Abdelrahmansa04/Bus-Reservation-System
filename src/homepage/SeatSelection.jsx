@@ -15,6 +15,10 @@ const SeatSelection = () => {
   // Initial selected seats and bus details
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [confirmation, setConfirmation] = useState(false);
+  
+  authen()
+
+  console.log(authen())
 
   
   useEffect(() => {
@@ -41,6 +45,11 @@ const SeatSelection = () => {
   // const seats = Array(20).fill(false); // 20 seats in total (for simplicity)
 
   const handleSeatSelect = (index) => {
+    
+    
+    
+    
+    
     setSelectedSeats((prev) => {
       const newSeats = [...prev];
       if (newSeats.includes(index)) {
