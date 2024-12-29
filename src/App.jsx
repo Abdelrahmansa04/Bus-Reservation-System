@@ -3,6 +3,7 @@ import React from 'react'
 import Signup from './Signup'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Login from './login'
+import authen from './authent.jsx'
 //from components
 import AddBus from './components/AddBus.jsx';
 import BusList from './components/Buslist.jsx';
@@ -28,7 +29,7 @@ function App() {
       <Route path="/payment" element={<Payment />} />
       <Route path="/payment-success" element={<PaymentSuccess />} />
       <Route path="/ticket-summary" element={<TicketSummary />} /> {/* Add route for Ticket Summary */}
-    
+      <Route path="/authen" element={<authen />}></Route>
 
       <Route path='/add-bus' element={
             <>

@@ -22,7 +22,34 @@ const Homepage = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   
+  // useEffect(() => {
+  //   const checkAuth = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:3001/auth", { withCredentials: true });
+  //       // console.log("hi")
+  //       console.log("Authentication check response:", response.data);
+  //       if (response.data.authenticated) {
+  //         setIsAuthenticated(true);
+  //       } else {
+  //         setIsAuthenticated(false);
+  //         navigate("/login");
+  //       }
+  //     } catch (error) {
+  //       console.log("Authentication check failed:", error);
+  //       setIsAuthenticated(false);
+  //       // navigate("/login");
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+  //   checkAuth();
+  // }, [navigate]);
+  
+  authent()
+
   const fetchBuses = async () =>{
     try {
       const res = await axios.get(`http://localhost:${port}/buses`);
@@ -89,7 +116,7 @@ const Homepage = () => {
   //   return <p>Loading buses...</p>;
   // }
 
-  // authent()
+
 
   const handleContactSubmit = async (e) => {
     e.preventDefault();
