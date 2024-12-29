@@ -25,6 +25,8 @@ const Homepage = () => {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
+  // authent()
+
   // useEffect(() => {
   //   const checkAuth = async () => {
   //     try {
@@ -40,7 +42,7 @@ const Homepage = () => {
   //     } catch (error) {
   //       console.log("Authentication check failed:", error);
   //       setIsAuthenticated(false);
-  //       // navigate("/login");
+  //        navigate("/login");
   //     } finally {
   //       setIsLoading(false);
   //     }
@@ -137,14 +139,14 @@ const Homepage = () => {
     }
   };
 
+  // authent()
+
   return (
     <div className="home-page">
-      <header className="header">
-        <h1 className="company-title">Bus Reservation</h1>
         <nav className="navbar">
-          <button onClick={handleLogout}>Logout</button>
+          <h1 className="company-title">Bus Reservation</h1>
+            <button id="logout-btn" onClick={handleLogout}>Logout</button>
         </nav>
-      </header>
 
       <div className="bus-search-bar">
         <select onChange={e => setPickupPoint(e.target.value)} value={pickupPoint}>

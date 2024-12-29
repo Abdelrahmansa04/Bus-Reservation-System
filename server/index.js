@@ -1,4 +1,3 @@
-
 const express = require("express");
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
@@ -6,11 +5,10 @@ const cors = require("cors");
 const session = require('express-session');
 const MonogoStore = require("connect-mongo");
 const userModel = require('./models/user');
-
 require('dotenv').config();
 const busRoutes = require('./routes/busRoutes');
-const bookingRoutes = require('./routes/bookingRouter');
-const SeatSelection = require('./routes/SeatSelection');
+const userRouter = require('./routes/userRoutes')
+const SeatSelection = require('./routes/SeatSelection')
 const contactRoutes = require('./routes/contactRoutes');
 
 
@@ -19,8 +17,8 @@ port = 3001
 const app = express()
 app.use(express.json())
 app.use(cors({
-    // origin: "http://localhost:3000", // Adjust this to match your frontend URL
-    // credentials: true,  // Allow cookies to be sent with requests
+    origin: "http://localhost:3000", // Adjust this to match your frontend URL
+    credentials: true,  // Allow cookies to be sent with requests
 }));
 
 app.use(session({
@@ -30,13 +28,14 @@ app.use(session({
     store: MonogoStore.create({mongoUrl: "mongodb://127.0.0.1:27017/bus-system"}),
     cookie: {
         httpOnly: true,
-        maxAge:36000000,
+        maxAge:5000000,
     }
 }))
 
 app.use('/buses', busRoutes);
 // app.use('/api', bookingRoutes);
 app.use('/seatselection',SeatSelection);
+app.use('/user',userRouter);
 
 
 // Contact routes
@@ -75,26 +74,19 @@ app.post('/login', async  (req,res)=> {
     
     try {
         const user = await userModel.findOne({ email });
-        console.log(user)
         if (!user) {
             return res.status(404).json("This email does not exist");
         }
 
         // Check password validity
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        console.log(isPasswordValid)
         if (!isPasswordValid) {
             return res.status(401).json("The password is incorrect");
         }
 
         // Set session ID
-        const sessionID = req.sessionID;
-        // req.session.authenticated = true;   
         req.session.userId = user._id;
-        // res.send(req.session)
-        // res.send(sessionID)
-
-        res.status(200).json({"message":"Login successful", "userId":req.session.userId, "sessionID": sessionID});
+        res.status(200).json("Login successful");
     } catch (err) {
         res.status(500).json("Internal server error");
     }
@@ -137,25 +129,28 @@ app.post('/register', async (req , res) => {
 })
 
 app.post("/logout",(req, res) => {
-    console.log("before: ", req.session)
     req.session.destroy(err => {
         if(err){
             return res.status(500).json("failed to logout");
         }
         res.clearCookie("connect.sid");
-        res.status(200).json({"message":"logout successfuly", "session": req.session});
-        console.log("after: ", req.session)
-
+        res.status(200).json("logout successfuly");
     })
 })
 
 app.get("/auth" , (req,res)=>{
-    console.log(req.session.userId)
     if(req.session.userId){
-        res.status(200).json({authenticated: true, "session": req.session.userId});
+        res.status(200).json({authenticated: true,"userId": req.session.userId});
     }else{
-        res.status(401).json({authenticated: false});
+        res.status(401).json({authenticated: false})
     }
+})
+
+app.post("/payment/:busId",(req,res)=>{
+    const busId = req.params;
+
+
+
 })
 
 app.listen(3001 , () =>{

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , useParams} from 'react-router-dom';
 import './Payment.css';
-
+import authen from '../authent';
+const port = 3001
 const Payment = () => {
+  authen()
+  const { busId } = useParams();
   const navigate = useNavigate();
   const [paymentDetails, setPaymentDetails] = useState({
     paymentMethod: 'visa', // Default to Visa
@@ -10,6 +13,7 @@ const Payment = () => {
     cardExpiry: '',
     cardCvc: '',
   });
+  
   const [paymentSuccess, setPaymentSuccess] = useState(false); // New state for payment success
   const [confirmationMessage, setConfirmationMessage] = useState(""); // New state for the confirmation message
 
@@ -39,9 +43,13 @@ const Payment = () => {
     `);
 
     // Simulate redirect to payment success page (e.g., navigate to a success page)
-    setTimeout(() => {
+    setTimeout(async() => {
+      const res_busId = await axios.post(`http://localhost:${port}/payment/${busId}`,
+        { busId },
+        { withCredentials: true }
+      )
       navigate('/payment-success'); // Redirect to payment success page
-    }, 10000); // Wait 2 seconds before navigating
+    }, 5000); // Wait 2 seconds before navigating
   };
 
   return (
@@ -97,7 +105,7 @@ const Payment = () => {
               required
               maxLength="3" // Limit to 3 characters
               pattern="\d{3}" // Regex to validate exactly 3 digits
-              title="CVvV must be exactly 3 numeric characters"
+              title="CVV must be exactly 3 numeric characters"
             />
           </>
         )}
