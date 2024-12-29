@@ -7,7 +7,7 @@ const Bus = require('../models/busModel');
 router.get('/:id', async (req,res) => {
     try {
         const busId = req.params.id;
-        const 
+        console.log(busId);
         const bus = await Bus.findById(busId);
         if (!bus) {
             return res.status(404).json({ message: 'Bus not found' });

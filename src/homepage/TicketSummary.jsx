@@ -32,14 +32,14 @@ const TicketSummary = () => {
         <h1>Ticket Summary</h1>
 
         <div className="details">
-          <div className="section-title">Passenger Information</div>
+          <h3 className="details-title">Passenger Information</h3>
           <p><strong>Name:</strong> {passenger.name}</p>
           <p><strong>Email:</strong> {passenger.email}</p>
           <p><strong>Phone:</strong> {passenger.phone}</p>
         </div>
 
         <div className="details">
-          <div className="section-title">Bus Details</div>
+          <h3 className="details-title">Bus Details</h3>
           <p><strong>Bus:</strong> {booking.busName}</p>
           <p><strong>Departure Time:</strong> {booking.departureTime}</p>
           <p><strong>Pickup:</strong> {booking.pickup}</p>
@@ -47,12 +47,12 @@ const TicketSummary = () => {
         </div>
 
         <div className="details">
-          <div className="section-title">Seats Selected</div>
+          <h3 className="details-title">Seats Selected</h3>
           <p>{booking.seats.join(', ')}</p>
         </div>
 
         <div className="details">
-          <div className="section-title">Total Price</div>
+          <h3 className="details-title">Total Price</h3>
           <p>{booking.totalPrice}</p>
         </div>
 

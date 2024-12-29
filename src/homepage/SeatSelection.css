@@ -3,8 +3,15 @@
   padding: 20px;
 }
 
+.header {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #800000;
+  color: white;
+}
+
 .header h1 {
-  color: #ffffff; /* Dark red color */
+  margin: 0;
 }
 
 .bus-details {
@@ -36,6 +43,12 @@
   border: 1px solid #ccc;
   cursor: pointer;
   font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.seat:hover {
+  background-color: #ffe6e6; /* Light red */
+  border-color: #800000;
 }
 
 .seat.selected {
@@ -51,6 +64,7 @@
   font-size: 1.1em;
   cursor: pointer;
   width: 100%;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .confirm-btn:hover {
@@ -78,8 +92,39 @@
   padding: 10px 20px;
   font-size: 1.1em;
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .proceed-btn:hover {
   background-color: #e6e6e6;
+}
+
+.proceed-btn:disabled {
+  background-color: #f0f0f0;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .seat-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .seat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .seat {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  .confirm-btn, .proceed-btn {
+    font-size: 1em;
+    padding: 8px;
+  }
 }
