@@ -5,13 +5,6 @@ const cors = require("cors");
 const session = require('express-session');
 const MonogoStore = require("connect-mongo");
 const userModel = require('./models/user');
-const express = require("express")
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
-const cors = require("cors")
-const session = require('express-session')
-const MonogoStore = require("connect-mongo")
-const userModel = require('./models/user')
 require('dotenv').config();
 const busRoutes = require('./routes/busRoutes');
 const bookingRoutes = require('./routes/bookingRouter');

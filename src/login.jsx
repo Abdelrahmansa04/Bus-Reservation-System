@@ -23,16 +23,21 @@ function Login() {
 
             console.log("Response", response);
 
-            // Store the token in sessionStorage upon successful login
-            const userId = response.data.userId;
-            const sessionID = response.data.sessionID;
-            console.log("user ID", userId);
-            response.status(200).json(response.data.userId);
-            alert("Login successful");
+                // Store the token in sessionStorage upon successful login
+                // sessionStorage.setItem('authToken', response.data.token);
+                const userId = response.data.userId;
+                const sessionID = response.data.sessionID;
+                // Alert the user that the login was successful
+                console.log("user ID", userId);
+                response.status(200).json(response.data.userId);
+                alert("Login successful");
 
-            // Navigate to the home or seat selection page
-            navigate("/home");  // or "/seatselection" based on your use case
-        } catch (error) {
+                // Navigate to the home or seat selection page
+                navigate("/home");  // or "/seatselection" based on your use case
+                sessionStorage.setItem('authToken', userId);            
+        }} catch (error) {
+            // console.error(error);
+            // Show an alert if login failed
             alert("Login failed: " + error.response?.data?.message || "An error occurred");
         }
     };
