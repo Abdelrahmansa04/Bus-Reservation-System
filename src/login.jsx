@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // Import Link
 import './homepage/Signup.css';
 import './homepage/login.css';
-
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -23,6 +22,7 @@ function Login() {
             );
 
             console.log("Response", response);
+
             if (response.status === 200) {
                 // Store the token in sessionStorage upon successful login
                 // sessionStorage.setItem('authToken', response.data.token);
@@ -39,15 +39,20 @@ function Login() {
         }} catch (error) {
             // console.error(error);
             // Show an alert if login failed
+
             alert("Login failed: " + error.response?.data?.message || "An error occurred");
         }
-        
     };
-   
 
     return (
         <div className="login-container">
             <h2>Bus Reservation System</h2>
+            
+            {/* Back to Register Button */}
+            <Link to="/register" className="back-button">
+                ← Register
+            </Link>
+
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input

@@ -35,9 +35,7 @@ const Payment = () => {
     
     // Set a confirmation message with trip details
     setConfirmationMessage(`
-      Payment successful! You have successfully booked a seat for your trip. 
       Your payment was made via ${paymentDetails.paymentMethod === 'visa' ? 'Visa' : 'Cash'}.
-      Your reservation details can be found here: [Trip Details Link].
     `);
 
     // Simulate redirect to payment success page (e.g., navigate to a success page)

@@ -15,11 +15,11 @@ const Homepage = () => {
   const [isLoading, setIsLoading] = useState(true); // Track loading state
 
   // Mock buses and routes data
-  const buses = [
-    { id: 1, name: "Express Bus", time: "10:00 AM", price: "130 EGP", pickup: "Borg Al-Arab", arrival: "Cairo" },
-    { id: 2, name: "City Bus", time: "12:00 PM", price: "50 EGP", pickup: "Alexandria", arrival: "Borg Al-Arab" },
-    { id: 3, name: "Night Bus", time: "9:00 PM", price: "130 EGP", pickup: "Borg Al-Arab", arrival: "Alexandria" },
-  ];
+  // const buses = [
+  //   { id: 1, name: "Express Bus", time: "10:00 AM", price: "130 EGP", pickup: "Borg Al-Arab", arrival: "Cairo" },
+  //   { id: 2, name: "City Bus", time: "12:00 PM", price: "50 EGP", pickup: "Alexandria", arrival: "Borg Al-Arab" },
+  //   { id: 3, name: "Night Bus", time: "9:00 PM", price: "130 EGP", pickup: "Borg Al-Arab", arrival: "Alexandria" },
+  // ];
 
   const popularRoutes = [
     { id: 1, route: "Borg Al-Arab to Cairo" },

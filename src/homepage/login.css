@@ -98,4 +98,16 @@
       font-size: 14px;
     }
   }
-  
+  .back-button {
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #333;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.back-button:hover {
+    color: #007BFF;
+    cursor: pointer;
+}
