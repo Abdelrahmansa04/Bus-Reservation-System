@@ -1,0 +1,122 @@
+/* General reset for margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Container for the form */
+  .add-bus {
+    width: 100%;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Form header */
+  .add-bus h2 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Input fields */
+  .add-bus input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f7f7f7;
+    transition: border-color 0.3s, background-color 0.3s;
+  }
+  
+  /* Input focus and hover effects */
+  .add-bus input:focus {
+    border-color: #a91d1dc3;
+    background-color: #fff;
+    outline: none;
+  }
+  
+  .add-bus input:hover {
+    background-color: #e9ecef;
+  }
+  
+  /* Button styling */
+  .add-bus button {
+    padding: 14px;
+    background-color: #ba3838;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .add-bus button:hover {
+    background-color: #a33c3c;
+    transform: translateY(-2px);
+  }
+  
+  .add-bus button:active {
+    transform: translateY(1px);
+  }
+  
+  /* Label text */
+  .add-bus label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #555;
+    display: block;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .add-bus {
+      padding: 20px;
+      margin: 20px;
+    }
+  
+    .add-bus h2 {
+      font-size: 22px;
+    }
+  
+    .add-bus input, .add-bus button {
+      font-size: 14px;
+    }
+  }
+  
+  /* Input fields group (spacing between inputs) */
+  .add-bus .input-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  /* To make each label/input group align well */
+  .add-bus .input-group input {
+    flex: 1;
+    min-width: 48%;
+  }
+  
+  /* Error messages */
+  .add-bus .error {
+    color: #da1111;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  

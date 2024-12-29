@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const cors = require("cors")
 const session = require('express-session')
 const MonogoStore = require("connect-mongo")
-const userModel = require('./models/users')
+const userModel = require('./models/user')
 require('dotenv').config();
 const busRoutes = require('./routes/busRoutes');
 const bookingRoutes = require('./routes/bookingRouter')
@@ -16,8 +16,8 @@ port = 3001
 const app = express()
 app.use(express.json())
 app.use(cors({
-    origin: "http://localhost:3000", // Adjust this to match your frontend URL
-    credentials: true,  // Allow cookies to be sent with requests
+    // origin: "http://localhost:3000", // Adjust this to match your frontend URL
+    // credentials: true,  // Allow cookies to be sent with requests
 }));
 app.use('/buses', busRoutes);
 // app.use('/api', bookingRoutes);

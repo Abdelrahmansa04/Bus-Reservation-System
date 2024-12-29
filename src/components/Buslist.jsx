@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import './Buslist.css';
+
 // import { set } from "mongoose";
 const port = 3001
 
@@ -36,9 +38,9 @@ const handleDel = async (id) =>{
 
 return (
     <>
-    <button onClick={() => fetchBuses()} className="button">Find Buses</button>
+    
     <div className="bus-list">
-        <br />
+        <br /> <button onClick={() => fetchBuses()} className="button">Find Buses</button>
         {buses.length > 0 ? (
             buses.map((bus) => (
                 <div key={bus._id} className="bus-container">

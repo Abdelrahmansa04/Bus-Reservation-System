@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 import "../App.css";
-
+import './AddBus.css';
 const port = 3001
 const AddBus = () => {
     const [totalSeats, setAllSeats] = useState('');
