@@ -25,6 +25,8 @@ const Homepage = () => {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
+  // authent()
+
   // useEffect(() => {
   //   const checkAuth = async () => {
   //     try {
@@ -40,7 +42,7 @@ const Homepage = () => {
   //     } catch (error) {
   //       console.log("Authentication check failed:", error);
   //       setIsAuthenticated(false);
-  //       // navigate("/login");
+  //        navigate("/login");
   //     } finally {
   //       setIsLoading(false);
   //     }
@@ -136,6 +138,8 @@ const Homepage = () => {
       console.error('Error sending contact message:', error);
     }
   };
+
+  // authent()
 
   return (
     <div className="home-page">
