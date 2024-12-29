@@ -5,6 +5,7 @@ const cors = require("cors");
 const session = require('express-session');
 const MonogoStore = require("connect-mongo");
 const userModel = require('./models/user');
+const Bus = require('./models/busModel');
 require('dotenv').config();
 const busRoutes = require('./routes/busRoutes');
 const userRouter = require('./routes/userRoutes')
@@ -146,12 +147,52 @@ app.get("/auth" , (req,res)=>{
     }
 })
 
-app.post("/payment/:busId",(req,res)=>{
-    const busId = req.params;
 
+app.post("/payment/:busId", async (req, res) => {
+    try {
+        const { busId } = req.params; // Destructure busId from params
+        const { userId, seatIndex } = req.body; // Extract userId and seatIndex from the body
 
+        // Find the bus by busId
+        const bus = await Bus.findOne({ busId });
 
-})
+        // Check if the bus exists
+        if (!bus) {
+            return res.status(404).json({ error: `Bus with ID ${busId} not found` });
+        }
+
+        // Validate seats data
+        if (!bus.seats || !Array.isArray(bus.seats.bookedSeats)) {
+            return res.status(500).json({ error: 'Invalid bus data' });
+        }
+
+        // Check if the seat is already booked
+        if (bus.seats.bookedSeats[seatIndex] !== '0') {
+            return res.status(400).json({ error: 'Seat is already booked' });
+        }
+
+        // Book the seat
+        bus.seats.bookedSeats[seatIndex] = userId;
+        await bus.save();
+
+        // Find the user by userId
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: `User with ID ${userId} not found` });
+        }
+
+        // Add the busId to the user's bookedBuses array if it doesn't already exist
+        if (!user.bookedBuses.includes(busId)) {
+            user.bookedBuses.push(busId);
+            await user.save();
+        }
+
+        return res.status(200).json({ message: 'Seat booked successfully and user updated' });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 app.listen(3001 , () =>{
     console.log("sever is running")

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate , useParams} from 'react-router-dom';
 import './Payment.css';
+import axios from 'axios';
 import authen from '../authent';
 const port = 3001
+
 const Payment = () => {
   authen()
   const { busId } = useParams();
@@ -44,8 +46,12 @@ const Payment = () => {
 
     // Simulate redirect to payment success page (e.g., navigate to a success page)
     setTimeout(async() => {
-      const res_busId = await axios.post(`http://localhost:${port}/payment/${busId}`,
-        { busId },
+      const req_user = await axios.get(`http://localhost:${port}/auth`, { withCredentials: true });
+      const userId = req_user.data.userId; // Ensure the token contains the user ID
+
+      
+      const res_busId = await axios.post(`http://localhost:${port}/buses/payment/${busId}`,
+        { busId , userId},
         { withCredentials: true }
       )
       navigate('/payment-success'); // Redirect to payment success page
