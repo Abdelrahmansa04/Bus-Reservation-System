@@ -1,26 +1,44 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState,useEffect } from 'react';
+import { useNavigate,useParams } from 'react-router-dom';
 import './SeatSelection.css';
+import axios from 'axios';
+import authen from '../authent';
+
+const port = 3001
 
 const SeatSelection = () => {
   const navigate = useNavigate();
-  
+  const { busId } = useParams();
+  const [busDetails, setBusDetails] = useState(null);
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null);
   // Initial selected seats and bus details
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [confirmation, setConfirmation] = useState(false);
 
-  // Sample bus details (should come from the selected bus)
-  const busDetails = {
-    name: 'Express Bus',
-    time: '10:00 AM',
-    price: '130 EGP',
-    pickup: 'Borg Al-Arab',
-    arrival: 'Cairo',
-    date: '2024-12-27',
-  };
+  
+  useEffect(() => {
+    const fetchBusDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:${port}/seatselection/${busId}`);
+        console.log(response.data)
+        setBusDetails(response.data);
+      } catch (err) {
+        console.error('Error fetching bus details:', err);
+        setError('Failed to fetch bus details.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (busId) {
+      fetchBusDetails();
+    }
+  }, [busId]);
+
 
   // Sample seat grid (Assuming bus has 10 seats per row)
-  const seats = Array(20).fill(false); // 20 seats in total (for simplicity)
+  // const seats = Array(20).fill(false); // 20 seats in total (for simplicity)
 
   const handleSeatSelect = (index) => {
     setSelectedSeats((prev) => {
@@ -50,6 +68,14 @@ const SeatSelection = () => {
     }
   };
 
+  if (loading) {
+    return <p>Loading bus details...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
   return (
     <div className="seat-selection-page">
       <header className="header">
@@ -57,16 +83,16 @@ const SeatSelection = () => {
       </header>
 
       <div className="bus-details">
-        <h2>{busDetails.name}</h2>
-        <p>Time: {busDetails.time}</p>
+      <h2>Bus details</h2>
+        <p>Time: {busDetails.time.departureTime}</p>
         <p>Price per seat: {busDetails.price}</p>
-        <p>Pickup: {busDetails.pickup}</p>
-        <p>Arrival: {busDetails.arrival}</p>
-        <p>Date: {busDetails.date}</p>
+        <p>Pickup: {busDetails.location.pickupLocation}</p>
+        <p>Arrival: {busDetails.location.arrivalLocation}</p>
+        <p>Date: {busDetails.schedule}</p>
       </div>
 
       <div className="seat-grid">
-        {seats.map((_, index) => (
+        {busDetails.seats.bookedSeats.map((_, index) => (
           <div
             key={index}
             className={`seat ${selectedSeats.includes(index) ? 'selected' : ''}`}

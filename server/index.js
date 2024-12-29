@@ -1,3 +1,10 @@
+const express = require("express");
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const cors = require("cors");
+const session = require('express-session');
+const MonogoStore = require("connect-mongo");
+const userModel = require('./models/user');
 const express = require("express")
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
@@ -7,18 +14,31 @@ const MonogoStore = require("connect-mongo")
 const userModel = require('./models/user')
 require('dotenv').config();
 const busRoutes = require('./routes/busRoutes');
-const bookingRoutes = require('./routes/bookingRouter')
-const SeatSelection = require('./routes/SeatSelection')
-const contactRoutes = require('./routes/contactRoutes'); // Assuming the contact routes are in the routes folder
+const bookingRoutes = require('./routes/bookingRouter');
+const SeatSelection = require('./routes/SeatSelection');
+const contactRoutes = require('./routes/contactRoutes');
 
 
 port = 3001
+
 const app = express()
 app.use(express.json())
 app.use(cors({
     // origin: "http://localhost:3000", // Adjust this to match your frontend URL
     // credentials: true,  // Allow cookies to be sent with requests
 }));
+
+app.use(session({
+    secret: "ARandomStringThatIsHardToGuess12345",
+    resave: false,
+    saveUninitialized: false,
+    store: MonogoStore.create({mongoUrl: "mongodb://127.0.0.1:27017/bus-system"}),
+    cookie: {
+        httpOnly: true,
+        maxAge:36000000,
+    }
+}))
+
 app.use('/buses', busRoutes);
 // app.use('/api', bookingRoutes);
 app.use('/seatselection',SeatSelection);
@@ -37,18 +57,7 @@ mongoose
 // app.get("/api/buses", require('./routes/busRoutes'))
 
 
-//backend of the login and signup and session
-app.use(session({
-    secret: "ARandomStringThatIsHardToGuess12345",
-    resave: false,
-    saveUninitialized: false,
-    store: MonogoStore.create({mongoUrl: "mongodb://127.0.0.1:27017/bus-system"}),
-    cookie: {
-        httpOnly: true,
-        maxAge: 36000000,
-        secure: false,
-    }
-}))
+
 
 
 app.post('/login', async  (req,res)=> {
@@ -87,6 +96,7 @@ app.post('/login', async  (req,res)=> {
         const sessionID = req.sessionID;
         // req.session.authenticated = true;   
         req.session.userId = user._id;
+        // res.send(req.session)
         // res.send(sessionID)
 
         res.status(200).json({"message":"Login successful", "userId":req.session.userId, "sessionID": sessionID});
@@ -145,12 +155,11 @@ app.post("/logout",(req, res) => {
 })
 
 app.get("/auth" , (req,res)=>{
-    // console.log(req.session.userId)
     console.log(req.session.userId)
     if(req.session.userId){
         res.status(200).json({authenticated: true, "session": req.session.userId});
     }else{
-        res.status(401).json({authenticated: false, "session": req.session.userId});
+        res.status(401).json({authenticated: false});
     }
 })
 
