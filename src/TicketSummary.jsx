@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Ticketsummary.css';
 
+
 const TicketSummary = () => {
   const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ const TicketSummary = () => {
 
   // Handle redirection to home or another page
   const handleHomeRedirect = () => {
-    navigate('/');
+    navigate('/');  // Navigates to the home page
   };
 
   return (

@@ -35,12 +35,19 @@ const SeatSelection = () => {
   };
 
   const handleConfirmSeats = () => {
-    setConfirmation(true);
+    if (selectedSeats.length > 0) {
+      setConfirmation(true);
+    } else {
+      alert('Please select at least one seat before confirming.');
+    }
   };
 
   const handleProceedToPayment = () => {
-    // Logic to proceed to the payment page (e.g., navigate to a payment page)
-    navigate('/payment');
+    if (selectedSeats.length > 0) {
+      navigate('/payment');
+    } else {
+      alert('You must select at least one seat to proceed to payment.');
+    }
   };
 
   return (
@@ -83,7 +90,11 @@ const SeatSelection = () => {
 
       {confirmation && (
         <div className="payment-bar">
-          <button className="proceed-btn" onClick={handleProceedToPayment}>
+          <button
+            className="proceed-btn"
+            onClick={handleProceedToPayment}
+            disabled={selectedSeats.length === 0}
+          >
             Proceed to Payment
           </button>
         </div>

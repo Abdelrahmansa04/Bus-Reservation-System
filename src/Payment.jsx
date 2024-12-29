@@ -8,8 +8,10 @@ const Payment = () => {
     paymentMethod: 'visa', // Default to Visa
     cardNumber: '',
     cardExpiry: '',
-    cardCvc: ''
+    cardCvc: '',
   });
+  const [paymentSuccess, setPaymentSuccess] = useState(false); // New state for payment success
+  const [confirmationMessage, setConfirmationMessage] = useState(""); // New state for the confirmation message
 
   // Function to format card number
   const formatCardNumber = (value) => {
@@ -21,15 +23,27 @@ const Payment = () => {
     return value.replace(/\D/g, '').replace(/(\d{2})(?=\d)/g, '$1/').slice(0, 5); // Max 4 digits in MM/YY format
   };
 
-  // Function to limit CVC input to 3 digits
+  // Function to strictly enforce 3 numeric characters for CVV
   const formatCvc = (value) => {
-    return value.replace(/\D/g, '').slice(0, 3); // Max 3 digits
+    return value.replace(/\D/g, '').slice(0, 3); // Allow only digits, max length of 3
   };
 
   const handlePaymentSubmit = (e) => {
     e.preventDefault();
-    // Perform payment processing here (e.g., API call)
-    navigate('/payment-success'); // Redirect to payment success
+    // Simulate successful payment and confirmation message
+    setPaymentSuccess(true);
+    
+    // Set a confirmation message with trip details
+    setConfirmationMessage(`
+      Payment successful! You have successfully booked a seat for your trip. 
+      Your payment was made via ${paymentDetails.paymentMethod === 'visa' ? 'Visa' : 'Cash'}.
+      Your reservation details can be found here: [Trip Details Link].
+    `);
+
+    // Simulate redirect to payment success page (e.g., navigate to a success page)
+    setTimeout(() => {
+      navigate('/payment-success'); // Redirect to payment success page
+    }, 2000); // Wait 2 seconds before navigating
   };
 
   return (
@@ -78,18 +92,27 @@ const Payment = () => {
               required
             />
             <input
-              type="text"  // Change type to "text" for CVV to prevent up/down arrows
-              placeholder="CVC"
-              value={paymentDetails.cardCvc}
-              onChange={(e) => setPaymentDetails({ ...paymentDetails, cardCvc: formatCvc(e.target.value) })}
-              maxLength="3" // Limit to 3 digits
+              type="text"
+              placeholder="CVV"
+              value={paymentDetails.cardCvv}
+              onChange={(e) => setPaymentDetails({ ...paymentDetails, cardCvv: formatCvc(e.target.value) })}
               required
+              maxLength="3" // Limit to 3 characters
+              pattern="\d{3}" // Regex to validate exactly 3 digits
+              title="CVvV must be exactly 3 numeric characters"
             />
           </>
         )}
 
         <button type="submit" className="cta-button">Pay Now</button>
       </form>
+
+      {/* Payment Success and Confirmation Message */}
+      {paymentSuccess && (
+        <div className="confirmation-message">
+          <p>{confirmationMessage}</p>
+        </div>
+      )}
     </div>
   );
 };
