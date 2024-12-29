@@ -13,6 +13,7 @@ import SeatSelection from './homepage/SeatSelection'
 import Payment from './homepage/Payment';
 import PaymentSuccess from './homepage/PaymentSuccess';
 import TicketSummary from './homepage/TicketSummary';  // Import TicketSummary component
+import Profile from './homepage/profile.jsx';
 
 
 
@@ -36,7 +37,9 @@ function App() {
             <AddBus />
             <BusList />
             </>
-        }></Route>
+      }></Route>
+      <Route path='/profile' element={<Profile/>}></Route>
+
     </Routes>
    </BrowserRouter>
   )

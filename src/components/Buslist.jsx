@@ -39,8 +39,9 @@ const handleDel = async (id) =>{
 return (
     <>
     
-    <div className="bus-list">
+    <div className="home-bus-list">
         <br /> <button onClick={() => fetchBuses()} className="button">Find Buses</button>
+        <br />
         {buses.length > 0 ? (
             buses.map((bus) => (
                 <div key={bus._id} className="bus-container">
