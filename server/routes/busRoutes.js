@@ -51,10 +51,7 @@ router.post("/", async (req, res) => {
     // console.log('Booking Time Allowance:', bookingTimeAllowance);
     // console.log('Allowed Number of Bags:', allowedNumberOfBags);
     const newBus = new Bus({
-      seats: { totalSeats: totalSeats,
-          // bookedSeats: new Array(totalSeats).fill(0)
-          bookedSeats: Array.from({ length: totalSeats }, () => 0)
-       },
+      seats: { totalSeats: totalSeats },
       schedule: schedule,
       price: price,
       minNoPassengers: minNoPassengers,
@@ -89,6 +86,17 @@ router.get("/", async (req, res) => {
     res.status(400).json({ message: "Error fetching busses", error: err });
   }
 });
+
+
+router.get("/:id", async (req, res) => {
+    try {
+        const response = await Bus.findById(req.params.id);
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 
 router.delete("/:id", async (req, res) => {
   try {
