@@ -71,6 +71,7 @@ Adjusted the Logic of the homepage (search bar and the hover of the buses avalib
 
 manage the backend of the contact us using express and mongodb for database (use postman & mongodb compass for testing the database)
 
+manage the logic of all the front end (homepage , bus seat selection and payment and confirmation and ticket summary)
 ///////////////////////////////////////////////////////
 
 --Mohamed Abdalfattah--
