@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
     email: {type: String, required: false},
     password: {type: String, required: false},
     bookedBuses: {
-        BusId: {type: String, required: false},
+        BusId: [{type: String, required: false}],
         SeatsNumbers: [{type: Number, required: false}],
     }
 

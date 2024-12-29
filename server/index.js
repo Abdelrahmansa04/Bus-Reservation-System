@@ -7,7 +7,7 @@ const MonogoStore = require("connect-mongo")
 const userModel = require('./models/user')
 require('dotenv').config();
 const busRoutes = require('./routes/busRoutes');
-const bookingRoutes = require('./routes/bookingRouter')
+const userRouter = require('./routes/userRoutes')
 const SeatSelection = require('./routes/SeatSelection')
 const contactRoutes = require('./routes/contactRoutes'); // Assuming the contact routes are in the routes folder
 
@@ -16,12 +16,13 @@ port = 3001
 const app = express()
 app.use(express.json())
 app.use(cors({
-    // origin: "http://localhost:3000", // Adjust this to match your frontend URL
-    // credentials: true,  // Allow cookies to be sent with requests
+    origin: "http://localhost:3000", // Adjust this to match your frontend URL
+    credentials: true,  // Allow cookies to be sent with requests
 }));
 app.use('/buses', busRoutes);
 // app.use('/api', bookingRoutes);
 app.use('/seatselection',SeatSelection);
+app.use('/user',userRouter);
 
 
 // Contact routes
@@ -111,7 +112,7 @@ app.post('/register', async (req , res) => {
     // })
     // .catch(err => res.json(err))
 
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     try {
         const userExist = await userModel.findOne({ email });
@@ -123,7 +124,7 @@ app.post('/register', async (req , res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create new user
-        const newUser = await userModel.create({email,password: hashedPassword});
+        const newUser = await userModel.create({name, email, password: hashedPassword});
 
         res.status(201).json(newUser);
     } catch (err) {

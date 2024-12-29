@@ -112,12 +112,10 @@ const Homepage = () => {
 
   return (
     <div className="home-page">
-      <header className="header">
-        <h1 className="company-title">Bus Reservation</h1>
         <nav className="navbar">
-          <button onClick={handleLogout}>Logout</button>
+          <h1 className="company-title">Bus Reservation</h1>
+            <button id="logout-btn" onClick={handleLogout}>Logout</button>
         </nav>
-      </header>
 
       <div className="bus-search-bar">
         <select onChange={e => setPickupPoint(e.target.value)} value={pickupPoint}>

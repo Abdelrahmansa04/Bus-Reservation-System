@@ -22,10 +22,10 @@
   transition: all 0.3s ease;
 }
 
-.bus-container:hover {
+/* .bus-container:hover {
   transform: scale(1.02);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
+} */
 
 /* Styling for each bus detail paragraph */
 .bus-container p {
@@ -43,7 +43,7 @@
 
 /* Styling for the Find Buses button */
 .button {
-  background-color: #007BFF;
+  background-color: #960000;
   color: white;
   padding: 10px 20px;
   font-size: 16px;
@@ -51,10 +51,12 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin: auto;
+  margin-bottom: 1rem;
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: #9b2222;
 }
 
 /* Styling for Delete Bus button */

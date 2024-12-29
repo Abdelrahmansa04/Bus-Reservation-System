@@ -41,7 +41,7 @@ const Payment = () => {
     // Simulate redirect to payment success page (e.g., navigate to a success page)
     setTimeout(() => {
       navigate('/payment-success'); // Redirect to payment success page
-    }, 10000); // Wait 2 seconds before navigating
+    }, 5000); // Wait 2 seconds before navigating
   };
 
   return (
@@ -97,7 +97,7 @@ const Payment = () => {
               required
               maxLength="3" // Limit to 3 characters
               pattern="\d{3}" // Regex to validate exactly 3 digits
-              title="CVvV must be exactly 3 numeric characters"
+              title="CVV must be exactly 3 numeric characters"
             />
           </>
         )}
