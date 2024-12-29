@@ -22,7 +22,34 @@ const Homepage = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   
+  // useEffect(() => {
+  //   const checkAuth = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:3001/auth", { withCredentials: true });
+  //       // console.log("hi")
+  //       console.log("Authentication check response:", response.data);
+  //       if (response.data.authenticated) {
+  //         setIsAuthenticated(true);
+  //       } else {
+  //         setIsAuthenticated(false);
+  //         navigate("/login");
+  //       }
+  //     } catch (error) {
+  //       console.log("Authentication check failed:", error);
+  //       setIsAuthenticated(false);
+  //       // navigate("/login");
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+  //   checkAuth();
+  // }, [navigate]);
+  
+  authent()
+
   const fetchBuses = async () =>{
     try {
       const res = await axios.get(`http://localhost:${port}/buses`);
@@ -89,7 +116,7 @@ const Homepage = () => {
   //   return <p>Loading buses...</p>;
   // }
 
-  // authent()
+
 
   const handleContactSubmit = async (e) => {
     e.preventDefault();
@@ -112,12 +139,10 @@ const Homepage = () => {
 
   return (
     <div className="home-page">
-      <header className="header">
-        <h1 className="company-title">Bus Reservation</h1>
         <nav className="navbar">
-          <button onClick={handleLogout}>Logout</button>
+          <h1 className="company-title">Bus Reservation</h1>
+            <button id="logout-btn" onClick={handleLogout}>Logout</button>
         </nav>
-      </header>
 
       <div className="bus-search-bar">
         <select onChange={e => setPickupPoint(e.target.value)} value={pickupPoint}>

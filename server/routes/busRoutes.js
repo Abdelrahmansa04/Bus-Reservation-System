@@ -51,7 +51,10 @@ router.post("/", async (req, res) => {
     // console.log('Booking Time Allowance:', bookingTimeAllowance);
     // console.log('Allowed Number of Bags:', allowedNumberOfBags);
     const newBus = new Bus({
-      seats: { totalSeats: totalSeats },
+      seats: { totalSeats: totalSeats,
+         // bookedSeats: new Array(totalSeats).fill(0)
+         bookedSeats: Array.from({ length: totalSeats }, () => 0)
+      },
       schedule: schedule,
       price: price,
       minNoPassengers: minNoPassengers,

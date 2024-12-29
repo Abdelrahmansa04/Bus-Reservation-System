@@ -1,25 +1,51 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import './Ticketsummary.css';
 
 const TicketSummary = () => {
   const navigate = useNavigate();
+    const { busId } = useParams();
+    const [busDetails, setBusDetails] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const port = 3001
+  
+    useEffect(() => {
+      const fetchBusDetails = async () => {
+        try {
+          const response = await axios.get(`http://localhost:${port}/seatselection/${busId}`);
+          console.log(response.data)
+          setBusDetails(response.data);
+        } catch (err) {
+          console.error('Error fetching bus details:', err);
+          // co('Failed to fetch bus details.');
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      if (busId) {
+        fetchBusDetails();
+      }
+      
+    }, [busId]);
+  
 
   // Simulated data (this would be passed as props or fetched from state)
-  const passenger = {
-    name: 'Abdelrahman Saeed',
-    email: 'abdelrahmansaeed288@gmail.com',
-    phone: '+1234567890'
-  };
+  // const passenger = {
+  //   name: 'Abdelrahman Saeed',
+  //   email: 'abdelrahmansaeed288@gmail.com',
+  //   phone: '+1234567890'
+  // };
 
-  const booking = {
-    busName: 'Express Bus',
-    departureTime: '10:00 AM',
-    pickup: 'Borg Al-Arab',
-    arrival: 'Cairo',
-    seats: ['A1', 'A2'],
-    totalPrice: '260 EGP'
-  };
+  // const booking = {
+  //   busName: 'Express Bus',
+  //   departureTime: '10:00 AM',
+  //   pickup: 'Borg Al-Arab',
+  //   arrival: 'Cairo',
+  //   seats: ['A1', 'A2'],
+  //   totalPrice: '260 EGP'
+  // };
 
   // Handle redirection to home or another page
   const handleHomeRedirect = () => {
