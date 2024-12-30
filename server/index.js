@@ -5,11 +5,12 @@ const cors = require("cors");
 const session = require('express-session');
 const MonogoStore = require("connect-mongo");
 const userModel = require('./models/user');
+const Bus = require('./models/busModel');
 require('dotenv').config();
 const busRoutes = require('./routes/busRoutes');
 const userRouter = require('./routes/userRoutes')
 const SeatSelection = require('./routes/SeatSelection')
-const contactRoutes = require('./routes/contactRoutes'); // Assuming the contact routes are in the routes folder
+const contactRoutes = require('./routes/contactRoutes');
 
 
 port = 3001
@@ -28,7 +29,7 @@ app.use(session({
     store: MonogoStore.create({mongoUrl: "mongodb://127.0.0.1:27017/bus-system"}),
     cookie: {
         httpOnly: true,
-        maxAge:500000,
+        maxAge:5000000,
     }
 }))
 
@@ -108,7 +109,7 @@ app.post('/register', async (req , res) => {
     // })
     // .catch(err => res.json(err))
 
-    const { email, password } = req.body;
+    const { name,phoneNumber, email, password } = req.body;
 
     try {
         const userExist = await userModel.findOne({ email });
@@ -120,9 +121,10 @@ app.post('/register', async (req , res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create new user
-        const newUser = await userModel.create({email,password: hashedPassword});
+        const newUser = await userModel.create({name,phoneNumber,email,password: hashedPassword});
 
         res.status(201).json(newUser);
+        
     } catch (err) {
         res.status(500).json("Internal server error");
     }
@@ -138,12 +140,50 @@ app.post("/logout",(req, res) => {
     })
 })
 
-app.get("/auth" , (req,res)=>{
+app.get("/auth/:busId" , (req,res)=>{
+    const busId = req.params.busId;
+    console.log("Auth Response: ", req.session)
+    req.session.busId = busId
     if(req.session.userId){
-        res.status(200).json({authenticated: true,"userId": req.session.userId});
+        res.status(200).json({authenticated: true, "busId":busId});
     }else{
         res.status(401).json({authenticated: false})
     }
+})
+
+
+app.get("/auth" , (req,res)=>{
+    if(req.session.userId){
+        res.status(200).json({authenticated: true,"userId": req.session.userId, "busId":req.session.busId});
+    }else{
+        res.status(401).json({authenticated: false})
+    }
+})
+
+// for profile to show the bus that are reserved
+app.post("/payment",async (req,res)=>{
+    // const busId = req.params.busId;
+    const {userId,busId} = req.body;
+
+    const bus = await Bus.findById(busId);
+    const user = await userModel.findById(userId);
+
+    res.status(200).json(bus)
+    console.log (bus)
+    if (!bus) {
+      console.log (res.status(404).json({ error: "bus not found" }));
+    }
+    if (!user) {
+        console.log (res.status(404).json({ error: "user not found" }));
+      }
+
+    const updateduser = await userModel.findByIdAndUpdate(
+            userId,
+            {$push:{bookedBuses:busId}},
+            {new : true}
+          );
+    
+   
 })
 
 app.listen(3001 , () =>{

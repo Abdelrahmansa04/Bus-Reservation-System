@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , useParams} from 'react-router-dom';
 import './Payment.css';
+import axios from 'axios';
+import authen from '../authent';
+const port = 3001
 
 const Payment = () => {
+  authen()
+  const { index } = useParams();
   const navigate = useNavigate();
   const [paymentDetails, setPaymentDetails] = useState({
     paymentMethod: 'visa', // Default to Visa
@@ -10,6 +15,7 @@ const Payment = () => {
     cardExpiry: '',
     cardCvc: '',
   });
+  
   const [paymentSuccess, setPaymentSuccess] = useState(false); // New state for payment success
   const [confirmationMessage, setConfirmationMessage] = useState(""); // New state for the confirmation message
 
@@ -39,9 +45,31 @@ const Payment = () => {
     `);
 
     // Simulate redirect to payment success page (e.g., navigate to a success page)
-    setTimeout(() => {
-      navigate('/payment-success'); // Redirect to payment success page
-    }, 5000); // Wait 2 seconds before navigating
+    setTimeout(async() => {
+
+      //request form auth end the user id and bus id
+      const req_user = await axios.get(`http://localhost:${port}/auth`, { withCredentials: true }); 
+      // req_user.data.busId = busId
+      console.log(req_user)
+      const userId = req_user.data.userId; // Ensure the token contains the user ID
+      const busId = req_user.data.busId;
+      console.log("Bus ID: ",busId);//bus Id from authentiction
+      // const Index =
+      console.log(index);
+       
+      // Send the seat reservation request to the backend
+      const response = await axios.post(
+        `http://localhost:${port}/seatselection/${busId}`,
+        { index, userId },
+        { withCredentials: true }
+      );
+      // updata the user booked buses
+      const res_busId = await axios.post(`http://localhost:${port}/payment`,
+        { userId,busId},
+        { withCredentials: true }
+      )
+      navigate(`/payment-success/${index}`); // Redirect to payment success page
+    }); // Wait 2 seconds before navigating
   };
 
   return (

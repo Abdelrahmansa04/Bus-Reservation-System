@@ -51,6 +51,19 @@ router.get("/", async (req, res) => {
     }
 });
 
+
+// Get Specific User
+router.get("/profile/:userId", async (req, res) => { 
+    const userId = req.params.userId
+    try {
+        const user = await User.findById(userId);
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
 // get a specific bus
 router.get("/bus/:id", async (req, res) => {
     try {

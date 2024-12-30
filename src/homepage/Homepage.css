@@ -41,6 +41,22 @@ nav {
   display: flex;
   align-items: center;
 }
+#logout-btn:hover{
+  background-color: #000000;
+  color: #ffffff;
+}
+#profile-btn{
+  height: 30px;
+  background-color: #ffffff;
+  color: #333;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+}
+#profile-btn:hover{
+  background-color: #000000;
+  color: #ffffff;
+}
 /* Search bar styling */
 .bus-search-bar {
   display: flex;

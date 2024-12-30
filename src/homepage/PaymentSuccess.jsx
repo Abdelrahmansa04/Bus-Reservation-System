@@ -1,12 +1,17 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './PaymentSuccess.css';
+import authen from '../authent';
+
+const port = 3001
 
 const PaymentSuccess = () => {
   const navigate = useNavigate();
+  const { index } = useParams();
+  authen()
 
   const handleProceedToTicketSummary = () => {
-    navigate('/Ticket-summary');  // Redirects to the TicketSummary page
+    navigate(`/Ticket-summary/${index}`);  // Redirects to the TicketSummary page
   };
 
   return (

@@ -56,6 +56,14 @@
   color: white;
 }
 
+/* Style for booked seats */
+.seat.booked {
+  background-color: #b30000; /* Darker red color */
+  color: white;
+  cursor: not-allowed; /* Make booked seats unclickable */
+}
+
+/* Confirm button style */
 .confirm-btn {
   background-color: #800000; /* Dark red color */
   color: white;

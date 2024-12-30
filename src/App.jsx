@@ -27,9 +27,9 @@ function App() {
       <Route path= '/login' element = {<Login />}></Route>
       <Route path='/home' element={<Homepage />}></Route>
       <Route path='/seat-selection/:busId' element={<SeatSelection />}></Route>
-      <Route path="/payment" element={<Payment />} />
-      <Route path="/payment-success" element={<PaymentSuccess />} />
-      <Route path="/ticket-summary" element={<TicketSummary />} /> {/* Add route for Ticket Summary */}
+      <Route path="/payment/:index" element={<Payment />} />
+      <Route path="/payment-success/:index" element={<PaymentSuccess />} />
+      <Route path="/ticket-summary/:index" element={<TicketSummary />} /> 
       <Route path="/authen" element={<authen />}></Route>
 
       <Route path='/add-bus' element={

@@ -1,31 +1,32 @@
-import React, { useState,useEffect } from 'react';
-import { useNavigate,useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import './SeatSelection.css';
 import axios from 'axios';
 import authen from '../authent';
 
-const port = 3001
+const port = 3001;
 
 const SeatSelection = () => {
   const navigate = useNavigate();
   const { busId } = useParams();
   const [busDetails, setBusDetails] = useState(null);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // Initial selected seats and bus details
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [confirmation, setConfirmation] = useState(false);
-  
-  authen()
+ 
+  authen();
 
-  console.log(authen())
 
-  
+
   useEffect(() => {
     const fetchBusDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:${port}/seatselection/${busId}`);
-        console.log(response.data)
+        const req_user = await axios.get(`http://localhost:${port}/auth`, { withCredentials: true });
+        console.log(req_user)
+        // const response = await axios.get(`http://localhost:${port}/seatselection/${busId}`);
+        const response = await axios.get(`http://localhost:${port}/seatselection/${req_user.data.busId}`);
+        console.log(response)
         setBusDetails(response.data);
       } catch (err) {
         console.error('Error fetching bus details:', err);
@@ -40,38 +41,60 @@ const SeatSelection = () => {
     }
   }, [busId]);
 
+  const handleSeatSelect = async (index) => {
+    try {
+      const req_user = await axios.get(`http://localhost:${port}/auth`, { withCredentials: true });
+      const userId = req_user.data.userId; // Ensure the token contains the user ID
 
-  // Sample seat grid (Assuming bus has 10 seats per row)
-  // const seats = Array(20).fill(false); // 20 seats in total (for simplicity)
-
-  const handleSeatSelect = (index) => {
-    
-    
-    
-    
-    
-    setSelectedSeats((prev) => {
-      const newSeats = [...prev];
-      if (newSeats.includes(index)) {
-        newSeats.splice(newSeats.indexOf(index), 1); // Deselect seat if already selected
-      } else {
-        newSeats.push(index); // Select the seat
+      if (!userId) {
+        alert('Session is ended');
+        navigate('/login');
+        return;
       }
-      return newSeats;
-    });
+
+      // Update the selected seats in the state
+      setSelectedSeats((prev) => {
+        const newSeats = [...prev];
+
+        // Only allow selecting available seats (index !== "0")
+        if (busDetails.seats.bookedSeats[index] === "0") {
+          if (newSeats.includes(index)) {
+            newSeats.splice(newSeats.indexOf(index), 1); // Deselect seat if already selected
+          } else {
+            newSeats.push(index); // Select the seat
+          }
+        } else {
+          console.log(`Seat ${index + 1} is already booked and cannot be selected.`);
+        }
+
+        return newSeats;
+      });
+
+      // Send the seat reservation request to the backend
+      // const response = await axios.post(
+      //   `http://localhost:${port}/seatselection/${busId}`,
+      //   { seatIndex: index, userId },
+      //   { withCredentials: true }
+      // );
+
+      // console.log('Seat selection successful:', response.data);
+    } catch (err) {
+      console.error('Error selecting seat:', err);
+    }
   };
 
   const handleConfirmSeats = () => {
-    if (selectedSeats.length > 0) {
+    if (selectedSeats.length === 1) {
       setConfirmation(true);
     } else {
       alert('Please select at least one seat before confirming.');
     }
   };
 
-  const handleProceedToPayment = () => {
-    if (selectedSeats.length > 0) {
-      navigate('/payment');
+  const handleProceedToPayment = (index) => {
+    if (selectedSeats.length === 1) {
+      
+      navigate(`/payment/${selectedSeats}`);
     } else {
       alert('You must select at least one seat to proceed to payment.');
     }
@@ -92,7 +115,7 @@ const SeatSelection = () => {
       </header>
 
       <div className="bus-details">
-      <h2>Bus details</h2>
+        <h2>Bus details</h2>
         <p>Time: {busDetails.time.departureTime}</p>
         <p>Price per seat: {busDetails.price}</p>
         <p>Pickup: {busDetails.location.pickupLocation}</p>
@@ -101,15 +124,21 @@ const SeatSelection = () => {
       </div>
 
       <div className="seat-grid">
-        {busDetails.seats.bookedSeats.map((_, index) => (
-          <div
-            key={index}
-            className={`seat ${selectedSeats.includes(index) ? 'selected' : ''}`}
-            onClick={() => handleSeatSelect(index)}
-          >
-            {index + 1}
-          </div>
-        ))}
+        {busDetails.seats.bookedSeats.map((seat, index) => {
+          const isBooked = seat !== "0";  // Check if the seat is booked
+          const isSelected = selectedSeats.includes(index);
+
+          return (
+            <div
+              key={index}
+              className={`seat ${isSelected ? 'selected' : ''} ${isBooked ? 'booked' : ''}`}
+              onClick={() => !isBooked && handleSeatSelect(index)} // Prevent selecting booked seats
+              title={isBooked ? "Can't select this seat" : ""} // Tooltip for unselectable seats
+            >
+              {index + 1}
+            </div>
+          );
+        })}
       </div>
 
       {confirmation ? (
