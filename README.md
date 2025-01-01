@@ -15,21 +15,19 @@ Features:
 
 6- Ticket summary
 
-7- Payment
+7- Payment and confirmation
 
-8- Rating and Review
+8- Contact US
 
-9- cancel the booked Bus
+9- Trip Details
 
-10- trip details
+10- Session Authentication 
 
-11- confirmation via email or sms
+11- Hashed Password saving in the database
 
-12- Black-list and white-list
+12- User Profile
 
-13- User profile
-
-14- Dashboard
+13- Dashboard
 
 
 ///////////////////////////////////////////////////////
