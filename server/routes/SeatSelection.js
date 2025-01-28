@@ -44,7 +44,8 @@ router.post('/:busId', async (req, res) => {
           {new : true}
         );        
       }
-      if (bus.bookedBuses.buses[i] !== busId){
+
+      if (user.bookedBuses.buses.indexOf(busId) === -1){
         const userBookedBuses = await User.updateOne(
           {_id : userId},
           {$push: {'bookedBuses.buses':busId}},

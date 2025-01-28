@@ -130,8 +130,8 @@ const Dashboard = () => {
                 <h1 className="dashboard-title">Dashboard</h1>
                 <div className="dashboard-cards">
                 {/* <h1>{busDetails[0].seats.bookedSeats[1] === userId ? "true":"false"} </h1> */}
-                {busDetails.length > 0 ? (
-                    busDetails.map((bus, index) => (
+                {busDetails.length > 0  ? (
+                    busDetails.map((bus, index) => ( bus !== null &&
                         <div className="dashboard-card" key={index}>
                             <p>{bus.location.pickupLocation} to {bus.location.arrivalLocation}</p>
                             <p>{bus.schedule}</p>

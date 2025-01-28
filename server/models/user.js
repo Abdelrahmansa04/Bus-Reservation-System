@@ -6,9 +6,7 @@ const UserSchema = new mongoose.Schema({
     email: {type: String, required: false},
     password: {type: String, required: false},
     bookedBuses:{
-         buses: [{type: Array, required: false}],
-         seats: [{type: Array, required: false}]
-    }
+         buses: [{type: Array, required: false}]}
 });
 
 module.exports = mongoose.model('User', UserSchema);
