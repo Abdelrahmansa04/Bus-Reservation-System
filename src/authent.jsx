@@ -12,7 +12,6 @@ useEffect(() => {
     const checkAuth = async () => {
     try {
         const response = await axios.get("http://localhost:3001/auth", { withCredentials: true });
-        console.log("Authentication check response:", response.data);
         if (response.data.authenticated) {
         setIsAuthenticated(true);
         return response.data.userId
