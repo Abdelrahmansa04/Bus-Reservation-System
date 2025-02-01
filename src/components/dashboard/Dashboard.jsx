@@ -21,6 +21,8 @@ const Dashboard = () => {
     const [seats, setSeats] = useState([]);
     const hasFetched = useRef(false); // Ref to track whether fetch has been performed
 
+
+
     const fetchUsers = async () => {
         try{
             // Get session data
@@ -28,17 +30,12 @@ const Dashboard = () => {
             
             // Store user ID in userID state from session data 
             setUserId(req_user.data.userId);
-
-            // Make a variable to hold user ID 
             const userId = req_user.data.userId;
 
             // Get user data
             const res = await axios.get(`http://localhost:${port}/user/profile/${userId}`);
-
-            // Store user data in the userDetails state
             setUserDetails(res.data);
 
-            // Make a variable to store the user details
             const userDetails = res.data;
             const busIds = userDetails.bookedBuses.buses;
 
@@ -49,39 +46,10 @@ const Dashboard = () => {
                 console.log(busDetails.data)
             }
 
-            
             setBusDetails(prevBuses => [...prevBuses, ...buses]);
-            // setBusDetails(busDetails)
+           
 
-
-            // const busAndSeat = userDetails.bookedBuses.buses.map((item, index) => [item, userDetails.bookedBuses.seats[index]])  
-            // setBusAndSeat(busAndSeat)
-            // console.log(busAndSeat)
-
-            // Loop over the booked busses of the current user
-            // for (let i = 0; i < userDetails.bookedBuses.length; i++) {
-            //     // Get the buses details
-            //     console.log(userDetails.bookedBuses[i])
-            //     const response = await axios.get(`http://localhost:${port}/seatselection/${userDetails.bookedBuses[i]}`);
-            //     console.log(response)
-            //     // Make a variable to store the bus details
-            //     const bus = response.data
-
-            //     // Add each bus to the buses state array
-            //     // setBuses(prevBuses => [...prevBuses, bus]);
-
-
-            //     let userSeats = [];
-            //         for (let j = 0; j < bus.seats.bookedSeats.length; j++) {
-            //             if (bus.seats.bookedSeats[j] === userId) {
-            //                 userSeats.push(j + 1);  // Add seat index (1-based)
-            //             }
-            //         }
-            //         setSeats((prevSeats) => [...prevSeats, ...userSeats]); 
-                    
-            // }
-
-        } catch (err) {
+        } catch (error) {
             console.error("Error fetching users:", error);
             setError("Failed to fetch bus details.");
         } finally {
@@ -110,11 +78,16 @@ const Dashboard = () => {
         };
 
         fetchUsers(); // Fetch user and bus details only once
-    }, []); // Empty dependency array ensures the effect runs only once
+    }, []); 
 
     useEffect(() => {
         console.log(busDetails)
     }, [busDetails])
+
+
+    const handleBusSelect = bus => {
+        navigate(`/seat-selection/${bus._id}`);//to get the bus id in the seat selection
+    };
 
     if (loading) {
         return <p>Loading bus details...</p>;
@@ -129,16 +102,20 @@ const Dashboard = () => {
             <div className="dashboard-container">
                 <h1 className="dashboard-title">Dashboard</h1>
                 <div className="dashboard-cards">
-                {/* <h1>{busDetails[0].seats.bookedSeats[1] === userId ? "true":"false"} </h1> */}
                 {busDetails.length > 0  ? (
                     busDetails.map((bus, index) => ( bus !== null &&
-                        <div className="dashboard-card" key={index}>
+                        <div className="dashboard-card" key={index} onClick={() => handleBusSelect(bus)}>
                             <p>{bus.location.pickupLocation} to {bus.location.arrivalLocation}</p>
                             <p>{bus.schedule}</p>
                             <p>{bus.time.departureTime} to {bus.time.arrivalTime}</p>
                             <p>{bus.seats.bookedSeats
                             .map((seat, index) => seat === userId ? index + 1: null)
                             .filter((index) => index !== null).join(", ")}</p>
+                            <div className="dashboard-buttons">
+                                {/* <button onClick={handleDetails}>more details</button>
+                                <button onClick={handleCancelation}>Cancel</button> */}
+                            </div>
+
                             </div> 
                     ))
                 ) : (

@@ -14,7 +14,7 @@ const Homepage = () => {
   const [arrivalPoint, setArrivalPoint] = useState('');
   const [date, setDate] = useState('');
 
-  const [selectedBus, setSelectedBus] = useState()
+  // const [selectedBus, setSelectedBus] = useState()
   // Contact form toggler
   const [showContactForm, setShowContactForm] = useState(false);
   // Available buses
@@ -68,12 +68,10 @@ const Homepage = () => {
   const handleRouteSelect = route => setSelectedRoute(route);
   
   // Handle selected bus 
-  const handleBusSelect = bus => {
-    setSelectedBus(bus);
-    setTimeout(async() => {
-      const req_user = await axios.get(`http://localhost:${port}/auth/${bus._id}`, { withCredentials: true });
-      console.log(req_user.data.busId)
-    });
+  const handleBusSelect = async bus => {
+    console.log(bus._id)
+    const req_user = await axios.get(`http://localhost:${port}/auth/${bus._id}`, { withCredentials: true }); 
+
     navigate(`/seat-selection/${bus._id}`);//to get the bus id in the seat selection
   };
 

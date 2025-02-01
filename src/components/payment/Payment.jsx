@@ -53,7 +53,7 @@ const Payment = () => {
       console.log(req_user)
       const userId = req_user.data.userId; // Ensure the token contains the user ID
       const busId = req_user.data.busId;
-      console.log("Bus ID: ",busId);//bus Id from authentiction
+      console.log("Bus ID: ", busId);//bus Id from authentiction
       // const Index =
       console.log(selectedSeats);
        
