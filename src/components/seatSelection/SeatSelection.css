@@ -2,81 +2,118 @@
 .seat-selection-page {
   padding: 20px;
   margin: auto;
-  width: 70%;
+  width: 80%;
+  background-image: url('https://content.almalnews.com/wp-content/uploads/2019/10/02.jpeg'); /* Background image */
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  color: white;
+  min-height: 100vh; /* Ensure the page takes up full height */
+  position: relative; /* To position the overlay */
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Add soft shadow to the page */
+  overflow: hidden; /* Prevent content overflow */
 }
 
+/* Overlay for Background */
+.seat-selection-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3); /* Slightly lighter overlay */
+  z-index: -1; /* Keep it behind the content */
+}
+
+/* Header Styling */
 .header {
   text-align: center;
-  padding: 10px 0;
-  background-color: #800000;
+  padding: 30px 0;
+  background-color: rgba(128, 0, 0, 0.7); /* Dark red background with 70% opacity */
   color: white;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Shadow for header */
 }
 
 .header h1 {
   margin: 0;
+  font-size: 3em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
+/* Bus Details Styling */
 .bus-details {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   text-align: center;
+  background-color: rgba(128, 0, 0, 0.6); /* Dark red with 60% opacity */
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .bus-details h2 {
-  font-size: 1.5em;
-  color: #800000; /* Dark red color */
+  font-size: 2em;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .bus-details p {
-  font-size: 1em;
+  font-size: 1.4em;
   display: flex;
   align-items: center;
   flex-direction: column;
+  color: #ffffff;
+  font-weight: 400;
 }
 
-.bus-container{
+/* Bus Container Styling */
+.bus-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  gap: 40px;
+  padding: 40px;
+  background-color: rgba(0, 0, 0, 0.35); /* Slight dark overlay with 35% opacity */
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Shadow for bus container */
 }
 
-.bus-seats{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  width: 250px;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-}
-
+/* Seat Grid Layout */
 .seat-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
-  width: 250px;
+  grid-template-columns: repeat(4, 1fr); /* Adjust grid columns */
+  gap: 15px;
+  margin-bottom: 30px;
+  width: 320px;
   justify-items: center;
 }
 
 .seat {
-  width: 40px;
-  height: 40px;
-  background-color: #f0f0f0;
+  width: 60px;
+  height: 60px;
+  background-color: #f4f4f4;
   text-align: center;
-  line-height: 40px;
-  border: 1px solid #ccc;
+  line-height: 60px;
+  border: 2px solid #ccc;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s, color 0.3s;
+  border-radius: 12px;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s ease-in-out;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .seat:hover {
-  background-color: #ffe6e6; /* Light red */
+  background-color: #ffcccc; /* Soft light red */
   border-color: #800000;
+  transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
 .seat.selected {
@@ -84,51 +121,65 @@
   color: white;
 }
 
-/* Style for booked seats */
 .seat.booked {
   background-color: #b30000; /* Darker red color */
   color: white;
   cursor: not-allowed; /* Make booked seats unclickable */
 }
 
-/* Confirm button style */
+/* Confirm Button Style */
 .confirm-btn {
   background-color: #800000; /* Dark red color */
   color: white;
   border: none;
-  padding: 10px;
-  font-size: 1.1em;
+  padding: 15px;
+  font-size: 1.3em;
   cursor: pointer;
   width: 100%;
-  transition: background-color 0.3s, color 0.3s;
+  border-radius: 12px;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .confirm-btn:hover {
   background-color: #b30000; /* Lighter dark red */
+  transform: scale(1.1); /* Slightly enlarge on hover */
 }
 
+.confirm-btn:active {
+  transform: scale(0.98); /* Shrink a bit when clicked */
+}
+
+/* Seat Confirmation Style */
 .seat-confirmation {
-  margin-top: 20px;
-  font-size: 1.2em;
-  color: #800000; /* Dark red color */
+  margin-top: 25px;
+  font-size: 1.6em;
+  color: #ffffff; /* Dark red color */
+  font-weight: 600;
+  text-align: center;
 }
 
+/* Payment Bar Styling */
 .payment-bar {
-  margin-top: 20px;
+  margin-top: 40px;
   background-color: #800000; /* Dark red color */
-  padding: 10px;
+  padding: 20px;
   text-align: center;
   color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* Proceed Button Style */
 .proceed-btn {
   background-color: #800000; /* Dark red color */
   color: white;
   border: none;
-  padding: 10px;
-  font-size: 1.1em;
+  padding: 15px;
+  font-size: 1.3em;
   cursor: pointer;
   width: 100%;
+  border-radius: 12px;
   transition: background-color 0.3s, color 0.3s;
 }
 
@@ -144,43 +195,44 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  /* .seat-grid {
-    grid-template-columns: repeat(3, 1fr);
-  } */
-  .seat-selection-page{
+  .seat-selection-page {
     width: 100%;
-   }
-  .bus-container{
+  }
+
+  .bus-container {
     flex-direction: column;
   }
-  .bus-details{
+
+  .bus-details {
     display: flex;
     flex-direction: column;
     text-align: center;
   }
 
-  .bus-data{
+  .bus-data {
     display: flex;
     flex-direction: row;
     text-align: center;
-    gap: 15px;
+    gap: 20px;
   }
 }
 
 @media (max-width: 480px) {
-  /* .seat-grid {
+  /* Adjust seat grid for smaller screens */
+  .seat-grid {
     grid-template-columns: repeat(2, 1fr);
-  } */
-/* 
+  }
+
+  /* Adjust seat size for smaller screens */
   .seat {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-  } */
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+  }
 
-  /* .confirm-btn, .proceed-btn {
-    font-size: 1em;
-    padding: 8px;
-  } */
-
+  /* Adjust button size for smaller screens */
+  .confirm-btn, .proceed-btn {
+    font-size: 1.1em;
+    padding: 12px;
+  }
 }

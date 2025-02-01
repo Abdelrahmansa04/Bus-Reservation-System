@@ -1,0 +1,75 @@
+/* Fullscreen container with background color */
+.landing-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #333;
+    background: linear-gradient(135deg, #ac3a44, #dc3545);
+    position: relative;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  /* Overlay to give a clean, modern look */
+  .overlay {
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    max-width: 450px;
+    width: 100%;
+  }
+  
+  h1 {
+    font-size: 2.8em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .description {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    color: #555;
+  }
+  
+  .btn-container {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 20px; /* Space between buttons */
+    justify-content: center;
+  }
+  
+  .btn {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    width: 180px;
+    margin: 0 auto; /* Center the buttons horizontally */
+  }
+  
+  .user-btn {
+    background-color: #df5050;
+    color: white;
+  }
+  
+  .admin-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn:focus {
+    outline: none;
+  }
+  

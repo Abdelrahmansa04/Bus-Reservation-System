@@ -269,7 +269,7 @@ const Homepage = () => {
         </div>
       )}
 
-      <Footer/>
+      <footer/>
       {alertFlag && (
           <div className="alert-overlay">
           <div className="overlay-content">

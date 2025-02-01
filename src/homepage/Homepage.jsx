@@ -17,7 +17,7 @@ const Homepage = () => {
   const [buses, setBuses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);  
   const [filteredBuses, setFilteredBuses] = useState(buses);
-  // Contact form states
+  // Contact us inputs
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
