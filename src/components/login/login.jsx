@@ -5,12 +5,11 @@ import Overlay from "../overlayScreen/overlay";
 import '../signup/Signup.css';
 import '../login/login.css';
 
-
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [alertFlag, setAlertFlag] = useState(false)
-    const [alertMessage, setAlertMessage] = useState("")
+    const [alertFlag, setAlertFlag] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -31,36 +30,36 @@ function Login() {
                 // Store the token in sessionStorage upon successful login
                 const userId = response.data.userId;
                 const sessionID = response.data.sessionID;
+                const role = response.data.role; // Ensure you are sending the role from backend
 
-                sessionStorage.setItem('authToken', userId)
+                sessionStorage.setItem('authToken', userId);
+                sessionStorage.setItem('role', role);
 
-                // Alert the user that the login was successful and Navigate to the home or seat selection page
-                setAlertMessage("Login successful")
-                setAlertFlag(true)
+                // Alert the user that the login was successful
+                setAlertMessage("Login successful");
+                setAlertFlag(true);
+
+                // Use setTimeout to wait a few seconds before navigating
                 setTimeout(() => {
-                    setAlertFlag(false)
-                    navigate('/home')          
-                }, 2000);
+                    setAlertFlag(false); // Hide the alert
+                    navigate('/home');   // Navigate to the homepage
+                }, 2000); // Wait for 2 seconds before navigating
             }
-
         } catch (error) {
-            // Show an alert if login failed
-            if (error.status === 404){
-                setAlertMessage("User not found")
-                setAlertFlag(true)
-            }
-            else if(error.status === 401){
-                setAlertMessage("Password is incorrect")
-                setAlertFlag(true)
-            }else{
-                setAlertMessage("There was an error during login")
-                setAlertFlag(true)
-                console.log(error)
+            // Handle error cases
+            if (error.response.status === 404) {
+                setAlertMessage("User not found");
+                setAlertFlag(true);
+            } else if (error.response.status === 401) {
+                setAlertMessage("Password is incorrect");
+                setAlertFlag(true);
+            } else {
+                setAlertMessage("There was an error during login");
+                setAlertFlag(true);
+                console.log(error);
             }
         }
-        
     };
-   
 
     return (
         <div className="login-container">
@@ -94,7 +93,6 @@ function Login() {
             </div>
 
             <Overlay alertFlag={alertFlag} alertMessage={alertMessage} setAlertFlag={setAlertFlag}/>
-           
         </div>
     );
 }
