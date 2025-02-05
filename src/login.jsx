@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import './homepage/Signup.css';
 import './homepage/login.css';
 
@@ -20,23 +20,24 @@ function Login() {
             const response = await axios.post(
                 "http://localhost:3001/login",
                 { email, password },
+                { withCredentials: true } 
             );
 
             console.log("Response", response);
-
+            if (response.status === 200) {
                 // Store the token in sessionStorage upon successful login
                 // sessionStorage.setItem('authToken', response.data.token);
                 const userId = response.data.userId;
                 const sessionID = response.data.sessionID;
                 // Alert the user that the login was successful
                 console.log("user ID", userId);
-                response.status(200).json(response.data.userId);
                 alert("Login successful");
-
+                // response.status(200).json(userId);
+                sessionStorage.setItem('authToken', userId)
+                console.log(userId)
                 // Navigate to the home or seat selection page
-                navigate("/home");  // or "/seatselection" based on your use case
-                // sessionStorage.setItem('authToken', userId);            
-        } catch (error) {
+                navigate("/home"); 
+        }} catch (error) {
             // console.error(error);
             // Show an alert if login failed
             alert("Login failed: " + error.response?.data?.message || "An error occurred");
@@ -48,6 +49,9 @@ function Login() {
     return (
         <div className="login-container">
             <h2>Bus Reservation System</h2>
+            <Link to="/register" className="back-button">
+                ← Register
+            </Link>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input

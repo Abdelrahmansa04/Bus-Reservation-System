@@ -13,7 +13,8 @@ router.post("/bus", async (req, res) => {
         console.log(req.body);
 
         // Check if all required fields are provided
-        if (!name || !email || !password || !bookedBuses) {
+        // !name || !email || !password || 
+        if (!bookedBuses) {
             return res.status(400).json({
                 message: "Missing required fields",
             });
@@ -51,6 +52,19 @@ router.get("/", async (req, res) => {
 });
 
 
+// Get Specific User
+router.get("/profile/:userId", async (req, res) => { 
+    const userId = req.params.userId
+    try {
+        const user = await User.findById(userId);
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+// get a specific bus
 router.get("/bus/:id", async (req, res) => {
     try {
         const users = await User.find({ _id: req.params.id });

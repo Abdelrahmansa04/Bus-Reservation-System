@@ -22,7 +22,36 @@ const Homepage = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   
+  // authent()
+
+  // useEffect(() => {
+  //   const checkAuth = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:3001/auth", { withCredentials: true });
+  //       // console.log("hi")
+  //       console.log("Authentication check response:", response.data);
+  //       if (response.data.authenticated) {
+  //         setIsAuthenticated(true);
+  //       } else {
+  //         setIsAuthenticated(false);
+  //         navigate("/login");
+  //       }
+  //     } catch (error) {
+  //       console.log("Authentication check failed:", error);
+  //       setIsAuthenticated(false);
+  //        navigate("/login");
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+  //   checkAuth();
+  // }, [navigate]);
+  
+  authent()
+
   const fetchBuses = async () =>{
     try {
       const res = await axios.get(`http://localhost:${port}/buses`);
@@ -52,6 +81,14 @@ const Homepage = () => {
   const handleRouteSelect = route => setSelectedRoute(route);
   const handleBusSelect = bus => {
     setSelectedBus(bus);
+    setTimeout(async() => {
+      const req_user = await axios.get(`http://localhost:${port}/auth/${bus._id}`, { withCredentials: true });
+      // req_user.data.busId = bus._id
+      console.log("a7a",req_user.data.busId)
+      // const userId = req_user.data.userId; // Ensure the token contains the user ID
+
+    });
+    // req_user.data.busId = busId
     navigate(`/seat-selection/${bus._id}`);//to get the bus id in the seat selection
   };
 
@@ -85,11 +122,21 @@ const Homepage = () => {
       alert("Failed to log out");
     }
   };
+
+    // Logout handler
+    const handleProfile = async () => {
+      try {
+          navigate("/profile");
+      } catch (error) {
+        console.error("profile failed:", error);
+        alert("Failed to go to profile");
+      }
+    };
   // if (isLoading) {
   //   return <p>Loading buses...</p>;
   // }
 
-  // authent()
+
 
   const handleContactSubmit = async (e) => {
     e.preventDefault();
@@ -110,14 +157,16 @@ const Homepage = () => {
     }
   };
 
+  // authent()
+
   return (
     <div className="home-page">
-      <header className="header">
-        <h1 className="company-title">Bus Reservation</h1>
         <nav className="navbar">
-          <button onClick={handleLogout}>Logout</button>
-        </nav>
-      </header>
+          <h1 className="company-title">Bus Reservation</h1>
+          <button id="profile-btn" onClick={handleProfile}>Profile</button>
+          <button id="logout-btn" onClick={handleLogout}>Logout</button>
+
+          </nav>
 
       <div className="bus-search-bar">
         <select onChange={e => setPickupPoint(e.target.value)} value={pickupPoint}>

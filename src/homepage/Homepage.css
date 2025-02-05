@@ -15,13 +15,17 @@ body {
 }
 
 /* Header styling */
-.header {
+nav {
   background-color: #8b0000;
   width: 100%;
-  padding: 20px 0;
+  padding: 6px 26px;
   text-align: center;
   color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
 
 .company-title {
   margin: 0;
@@ -29,6 +33,30 @@ body {
   font-weight: bold;
 }
 
+#logout-btn{
+  height: 30px;
+  background-color: #ffffff;
+  color: #333;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+}
+#logout-btn:hover{
+  background-color: #000000;
+  color: #ffffff;
+}
+#profile-btn{
+  height: 30px;
+  background-color: #ffffff;
+  color: #333;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+}
+#profile-btn:hover{
+  background-color: #000000;
+  color: #ffffff;
+}
 /* Search bar styling */
 .bus-search-bar {
   display: flex;
@@ -83,6 +111,7 @@ body {
 .route-card {
   background-color: #8b0000; 
   color: #fff;
+  max-width: 200px;
   padding: 10px 20px;
   border-radius: 5px;
   font-size: 1rem;
