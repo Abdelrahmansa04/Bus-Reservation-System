@@ -35,16 +35,17 @@ function VerifyEmail() {
 
     const handleResendCode = async () => {
         try {
+            const token = localStorage.getItem("verificationToken");
             const response = await axios.post("http://localhost:3001/varification/resend-code", { token });
-
+    
             if (response.status === 200) {
                 setResendMessage("New verification code sent! Check your email.");
+                localStorage.setItem("verificationToken", response.data.newToken); // Store new token
             }
         } catch (err) {
             setResendMessage(err.response?.data?.message || "Error resending code.");
         }
     };
-
     return (
         <div>
             <h2>Verify Your Email</h2>

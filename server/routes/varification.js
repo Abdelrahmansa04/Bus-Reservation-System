@@ -99,7 +99,6 @@ router.post("/verify-email", async (req, res) => {
 
 
 router.post('/resend-code', async (req, res) => {
-    console.log("mmm")
     const { token } = req.body;
     
     try {
@@ -108,7 +107,7 @@ router.post('/resend-code', async (req, res) => {
 
         // Generate a new verification code
         const newVerificationCode = generateVerificationCode();
-        console.log(tempUser.verificationCode)
+        
         // Create a new token with the updated verification code
         const newToken = jwt.sign(
             { 
@@ -121,7 +120,7 @@ router.post('/resend-code', async (req, res) => {
             "ARandomStringThatIsHardToGuess12345", 
             { expiresIn: "10m" }
         );
-        console.log(tempUser.verificationCode)
+       
         // Send the new verification code via email
         await transporter.sendMail({
             from: process.env.EMAIL_USER,
@@ -129,8 +128,7 @@ router.post('/resend-code', async (req, res) => {
             subject: "Verify Your Email",
             html: `<p>Your new verification code is: <strong>${newVerificationCode}</strong></p>`,
         });
-        console.log(tempUser.verificationCode)
-
+        
         // Respond with success message & return new token
         res.json({ message: 'New verification code sent!', newToken });
 
