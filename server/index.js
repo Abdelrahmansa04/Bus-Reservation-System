@@ -155,7 +155,7 @@ app.post("/api/login", async (req, res) => {
     // Set session ID
     console.log(req.session);
     req.session.userId = user._id;
-    req.session.userRole = user.role;
+    req.session.userrole = user.role;
     console.log(req.session);
     res.status(200).json("Login successful");
   } catch (err) {

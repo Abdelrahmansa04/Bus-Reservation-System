@@ -6,11 +6,11 @@ const isAuthenticated = (req, res, next) => {
     if (req.session.userId) {
       return next();
     }
-    res.status(401).json({ message: "unauthenticated: Please log in" });
+    return res.status(401).json({ message: "unauthenticated: Please log in" });
   };
 
 const isAuthoraized = (req, res, next) => {
-    if (req.session.userId && req.session.userrole == "admin") {
+    if (req.session.userId && req.session.userrole === "admin") {
 
       return next();
     }

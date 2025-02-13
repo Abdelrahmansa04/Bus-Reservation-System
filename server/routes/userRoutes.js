@@ -2,7 +2,7 @@ const express = require('express');
 const User = require('../models/user');
 const router = express.Router();
 const Bus =  require('../models/busModel');
-const middlleware = require('../controllers/middleware')
+const middleware = require('../controllers/middleware')
 const { default: mongoose } = require('mongoose');
 const { route } = require('./busRoutes');
 
@@ -43,7 +43,7 @@ router.post("/bus", async (req, res) => {
 })
 
 // Get all Users
-router.get("/",middle ,async (req, res) => { 
+router.get("/",middleware.isAuthoraized ,async (req, res) => { 
     try {
         const users = await User.find();
         res.json(users);

@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: false },
   bookedBuses: {
     buses: [{ type: Array, required: false }],
-  },
+},
   role: { type: String, required: false , default: "user"},
 });
 
