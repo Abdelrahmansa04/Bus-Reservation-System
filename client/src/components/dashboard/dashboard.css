@@ -1,0 +1,28 @@
+.dashboard-cards{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    overflow: scroll;
+    max-height: 200px;
+}
+
+
+.dashboard-card{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 200px;
+    align-items: center;
+    gap: 8px;
+}
+
+@media screen and (max-width: 500px){
+    .dashboard-cards{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    
+}
