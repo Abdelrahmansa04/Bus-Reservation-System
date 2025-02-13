@@ -25,7 +25,7 @@ function App() {
       <Routes>
         <Route path="/register" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/home" element={<Homepage />}></Route>
+        <Route path="/" element={<Homepage />}></Route>
         <Route
           path="/seat-selection/:busId"
           element={<SeatSelection />}
@@ -42,7 +42,7 @@ function App() {
         <Route path="/authen" element={<authen />}></Route>
 
         <Route path="/add-bus" element={<AddBus />}></Route>
-        <Route path="/buses" element={<BusList />}></Route>
+        <Route path="/bus-list" element={<BusList />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
       </Routes>
       <Footer />

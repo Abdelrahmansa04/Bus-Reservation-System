@@ -2,11 +2,12 @@ const express = require('express');
 const User = require('../models/user');
 const router = express.Router();
 const Bus =  require('../models/busModel');
+const middlleware = require('../controllers/middleware')
 const { default: mongoose } = require('mongoose');
 const { route } = require('./busRoutes');
-const middleware = require('../controllers/middleware')
+
 // Add new User details
-router.post("/bus",async (req, res) => {
+router.post("/bus", async (req, res) => {
     try {
         const { name, email, password, bookedBuses } = req.body;
 
@@ -42,7 +43,7 @@ router.post("/bus",async (req, res) => {
 })
 
 // Get all Users
-router.get("/", middleware.isAuthoraized ,async (req, res) => { 
+router.get("/",middle ,async (req, res) => { 
     try {
         const users = await User.find();
         res.json(users);
@@ -53,7 +54,7 @@ router.get("/", middleware.isAuthoraized ,async (req, res) => {
 
 
 // Get Specific User
-router.get("/profile/:userId",middleware.isAuthenticated, async (req, res) => { 
+router.get("/profile/:userId", async (req, res) => { 
     const userId = req.params.userId
     try {
         const user = await User.findById(userId);

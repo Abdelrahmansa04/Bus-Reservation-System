@@ -1,10 +1,9 @@
 const express = require("express");
 const Bus = require("../models/busModel");
 const router = express.Router();
-const middleware = require('../controllers/middleware')
 
 // Add new Bus details
-router.post("/",middleware.isAuthoraized, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const {
       totalSeats,
@@ -102,7 +101,7 @@ router.get("/:id", async (req, res) => {
 });
 
 
-router.delete("/:id",middleware.isAuthoraized, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const deletedBus = await Bus.deleteOne({ _id: id });
